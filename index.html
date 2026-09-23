@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Широков Иван (ALMES37) — сайты и дизайн</title>
+  <meta name="description" content="Широков Иван — делаю сайты с характером и дизайн под заказ. Не по шаблонам: рентген-эффекты, 3D, живые анимации.">
+  <meta name="theme-color" content="#0a0b0e">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Широков Иван — сайты и дизайн">
+  <meta property="og:description" content="Делаю сайты, которые запоминают. И не только.">
+  <meta property="og:image" content="img/me/sunset-back.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0b0e'/%3E%3Ccircle cx='16' cy='18' r='5' fill='%23a9c1f2'/%3E%3Cpath d='M16 3v10' stroke='%23dde2e9' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Golos+Text:wght@400;500;600&family=Martian+Mono:wght@300;400;500&family=Tektur:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#about">Перейти к содержимому</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Плавающая шапка: появляется после первого экрана -->
+  <header class="nav" data-nav>
+    <a class="nav__brand" href="#top" aria-label="Широков Иван — наверх">
+      <span data-brand aria-hidden="true">(???????_?)</span>
+    </a>
+    <nav class="nav__links" aria-label="Разделы">
+      <a href="#about" data-nav-link="about">обо мне</a>
+      <a href="#works" data-nav-link="works">сайты</a>
+      <a href="#design" data-nav-link="design">дизайн</a>
+      <a href="#contact" data-nav-link="contact">связь</a>
+    </nav>
+    <span class="nav__count mono" aria-hidden="true">[ <b data-count>001</b> / 005 ]</span>
+  </header>
+
+  <main>
+    <!-- 001 — Первый экран -->
+    <section class="hero" id="top" aria-label="Первый экран" data-section="001">
+      <div class="hero__stage" data-stage>
+        <div class="hero__glow" data-glow aria-hidden="true"><i></i></div>
+        <div class="frame" data-frame aria-hidden="true"></div>
+        <div class="screen" data-screen>
+          <div class="screen__metal" data-metal aria-hidden="true"></div>
+          <div class="screen__night" data-night aria-hidden="true"></div>
+          <canvas class="screen__fibers" data-fibers aria-hidden="true"></canvas>
+
+          <div class="screen__ui" data-screen-ui>
+            <div class="screen__tl">
+              <span class="screen__brand" data-brand data-brand-hero aria-hidden="true">(???????_?)</span>
+              <span class="mono screen__ver" data-intro>[ v.01 · портфолио ]</span>
+            </div>
+
+            <nav class="screen__nav" aria-label="Разделы">
+              <a href="#about" data-intro>обо мне <i aria-hidden="true">↗</i></a>
+              <a href="#works" data-intro>сайты <i aria-hidden="true">↗</i></a>
+              <a href="#design" data-intro>дизайн <i aria-hidden="true">↗</i></a>
+              <a href="#contact" data-intro>связь <i aria-hidden="true">↗</i></a>
+            </nav>
+
+            <h1 class="screen__title">
+              <span class="ln"><span data-line>где идея</span></span>
+              <span class="ln ln--2"><span data-line>становится</span></span>
+              <span class="ln ln--3"><span data-line><em>живым</em></span></span>
+              <span class="ln ln--4"><span data-line><b>//</b> сайтом</span></span>
+            </h1>
+
+            <div class="screen__side">
+              <div class="screen__side-row mono" data-intro>
+                <span data-initial>( ? )</span>
+                <span>[ 001 / 005 ]</span>
+              </div>
+              <p data-intro>Кто сделал этот сайт — узнаешь чуть ниже. А пока подвигай мышкой: огоньки тянутся за тобой.</p>
+              <a class="btn-line" href="#about" data-intro>узнать, кто это</a>
+            </div>
+
+            <span class="screen__year mono" data-intro>[ 2026 ]</span>
+            <a class="screen__down" href="#about" aria-label="Листать вниз" data-intro>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 4v15m0 0-6-6m6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <div class="screen__power" data-power aria-hidden="true"><pre class="boot mono" data-boot></pre><i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 002 — Кто за экраном -->
+    <section class="about" id="about" aria-labelledby="about-title" data-section="002">
+      <div class="wrap about__grid">
+        <figure class="portrait" data-portrait>
+          <img src="img/me/sunset-profile.jpg" alt="Иван Широков в очках на фоне заката над озером" width="1100" height="1467" loading="lazy" decoding="async">
+          <canvas data-pixel aria-hidden="true"></canvas>
+          <span class="cross cross--tl" aria-hidden="true"></span>
+          <span class="cross cross--tr" aria-hidden="true"></span>
+          <span class="cross cross--bl" aria-hidden="true"></span>
+          <span class="cross cross--br" aria-hidden="true"></span>
+          <figcaption class="mono">[ кадр 01 ] закат, озеро</figcaption>
+        </figure>
+
+        <div class="about__text">
+          <p class="label mono" data-reveal>[ 002 ] кто за экраном</p>
+          <h2 class="about__name" id="about-title" aria-label="Широков Иван">
+            <span data-decode="ШИРОКОВ" aria-hidden="true">▒▒▒▒▒▒▒</span>
+            <span data-decode="ИВАН" aria-hidden="true">▒▒▒▒</span>
+          </h2>
+          <p class="about__lead" data-reveal><em>делаю сайты</em> — и не только</p>
+          <p class="about__p" data-reveal>
+            Собираю сайты с нуля — кодом или на Tilda. Мне скучно, когда страница просто листается,
+            поэтому в каждой работе ищу прикол, который запомнится: рентген сквозь кузов машины,
+            3D-пирамиду прямо в браузере, магазин, который меняет материал кнопок.
+            А ещё делаю дизайн — от постера до оформления соцсетей.
+          </p>
+          <dl class="specs" data-reveal>
+            <div><dt class="mono">[ делаю ]</dt><dd>сайты, лендинги, дизайн</dd></div>
+            <div><dt class="mono">[ инструменты ]</dt><dd>HTML · CSS · JS · GSAP · Three.js · Tilda · Figma</dd></div>
+            <div><dt class="mono">[ подход ]</dt><dd>без шаблонов — каждый проект с нуля</dd></div>
+            <div><dt class="mono">[ статус ]</dt><dd><span class="dot" aria-hidden="true"></span>беру заказы</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="strip" data-strip aria-label="Фотографии">
+        <div class="strip__track" data-strip-track>
+          <figure><img src="img/me/red-square.jpg" alt="Иван на Красной площади у храма Василия Блаженного" width="960" height="1280" loading="lazy" decoding="async"><figcaption class="mono">[ 01 ] красная площадь</figcaption></figure>
+          <figure><img src="img/me/city-night.jpg" alt="Иван ночью на фоне небоскрёбов Москва-Сити" width="960" height="1280" loading="lazy" decoding="async"><figcaption class="mono">[ 02 ] сити, ночь</figcaption></figure>
+          <figure><img src="img/me/pavilion.jpg" alt="Иван у красно-зелёной китайской галереи" width="960" height="1280" loading="lazy" decoding="async"><figcaption class="mono">[ 03 ] китайский сад</figcaption></figure>
+          <figure><img src="img/me/city-river.jpg" alt="Иван у реки, в воде отражаются огни башен" width="960" height="1280" loading="lazy" decoding="async"><figcaption class="mono">[ 04 ] набережная</figcaption></figure>
+          <figure><img src="img/me/kremlin.jpg" alt="Иван на брусчатке Красной площади, позади Спасская башня" width="960" height="1280" loading="lazy" decoding="async"><figcaption class="mono">[ 05 ] брусчатка</figcaption></figure>
+          <figure><img src="img/me/city-grass.jpg" alt="Иван сидит на траве спиной, смотрит на Москва-Сити" width="960" height="1280" loading="lazy" decoding="async"><figcaption class="mono">[ 06 ] вид на сити</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 003 — Сайты -->
+    <section class="works" id="works" aria-labelledby="works-title" data-section="003">
+      <div class="works__bg" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="label mono" data-reveal>[ 003 ] работы</p>
+          <h2 class="sec-title" id="works-title" data-reveal>Сайты</h2>
+        </header>
+
+        <div class="group">
+          <div class="group__head" data-reveal>
+            <span class="group__num mono">01 —</span>
+            <h3>Для себя</h3>
+            <p>Пробы и эксперименты. Здесь я проверяю идеи на прочность — а потом делаю такие же штуки для заказчиков.</p>
+          </div>
+
+          <div class="cards">
+            <!-- Audi -->
+            <article class="card" data-reveal>
+              <div class="card__media xray" data-xray>
+                <img src="img/work/audi-ext.jpg" alt="Чёрная Audi RS 7 ABT на парковке" width="1200" height="675" loading="lazy" decoding="async">
+                <img class="xray__top" src="img/work/audi-xray.jpg" alt="" width="1200" height="675" loading="lazy" decoding="async">
+                <span class="xray__lens" aria-hidden="true"></span>
+                <span class="chip">наведи — рентген</span>
+              </div>
+              <div class="card__body">
+                <div class="card__meta mono"><span>[ 01 ]</span><span>музей · 2026</span></div>
+                <h4 class="card__title">Легенды Audi</h4>
+                <p class="card__text">Музей восьми легендарных Audi — от quattro 1980 года до болида F1. Главный прикол — рентген: наводишь курсор на машину, и сквозь кузов видно двигатель и всю начинку.</p>
+                <ul class="tags"><li>рентген</li><li>GSAP</li><li>жидкое стекло</li></ul>
+                <div class="more" data-more>
+                  <button class="btn-pill" type="button" aria-expanded="false" aria-controls="more-audi">Подробнее <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                  <div class="more__panel" id="more-audi"><ul>
+                    <li>Рентген-слой совпадает с фото один в один</li>
+                    <li>Анимации при прокрутке в обе стороны</li>
+                    <li>Шапка и кнопки из «жидкого стекла», как в iOS</li>
+                    <li>На телефоне — касание вместо курсора</li>
+                  </ul></div>
+                </div>
+                <div class="card__actions">
+                  <a class="btn-silver" href="https://almes37.github.io/audi-legends/" target="_blank" rel="noopener noreferrer">Перейти на сайт <i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Магазины -->
+            <article class="card" data-reveal>
+              <div class="card__media shop" data-shop>
+                <img class="is-on" src="img/work/shop-sneakers.jpg" alt="Магазин кроссовок: сетка моделей Puma" width="1200" height="750" loading="lazy" decoding="async">
+                <img src="img/work/shop-tech.jpg" alt="Магазин техники в стиле жидкого стекла" width="1200" height="750" loading="lazy" decoding="async">
+                <img src="img/work/shop-tea.jpg" alt="Магазин чая в китайском стиле с фонарями" width="1200" height="750" loading="lazy" decoding="async">
+                <div class="shop__tabs" role="group" aria-label="Стиль магазина">
+                  <button type="button" class="is-on" aria-pressed="true" data-mat="suede">кроссовки</button>
+                  <button type="button" aria-pressed="false" data-mat="glass">техника</button>
+                  <button type="button" aria-pressed="false" data-mat="jade">чай</button>
+                </div>
+              </div>
+              <div class="card__body">
+                <div class="card__meta mono"><span>[ 02 ]</span><span>магазины · 2026</span></div>
+                <h4 class="card__title">ALMES shop</h4>
+                <p class="card__text">Три магазина в одном сайте, и у каждого свой характер: кроссовки, техника и чай. Переключаешь раздел — меняется весь стиль, вплоть до материала кнопок.</p>
+                <ul class="tags"><li>3 стиля</li><li>каталог</li><li>сравнение</li></ul>
+                <div class="more" data-more>
+                  <button class="btn-pill" type="button" aria-expanded="false" aria-controls="more-shop">Подробнее <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                  <div class="more__panel" id="more-shop"><ul>
+                    <li>Кроссовки — замша, кожа и джинса, колесо моделей</li>
+                    <li>Техника — блюр и жидкое стекло; в 3D не вся техника, а только модели, для которых нашлись бесплатные 3D-модели, у остальных — официальные фото</li>
+                    <li>Чай — нефрит, фонари и дракон, фон меняется кадрами</li>
+                    <li>Сравнение техники, как в DNS</li>
+                  </ul></div>
+                </div>
+                <div class="card__actions">
+                  <a class="btn-silver" href="https://almes37.github.io/almes-shop/almes-shop/" target="_blank" rel="noopener noreferrer">Перейти на сайт <i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Пирамида -->
+            <article class="card" data-reveal>
+              <div class="card__media tilt" data-tilt>
+                <img src="img/work/pyramid.jpg" alt="3D-пирамида Хеопса из каменных блоков в песчаной дымке" width="1200" height="750" loading="lazy" decoding="async">
+                <span class="chip">3D · звук · частицы</span>
+              </div>
+              <div class="card__body">
+                <div class="card__meta mono"><span>[ 03 ]</span><span>3D · 2026</span></div>
+                <h4 class="card__title">Пирамида 3D</h4>
+                <p class="card__text">Взял сайт Igloo Inc. — один из самых сложных 3D-сайтов — и повторил его эффекты на своей сцене. Пирамида, песок, артефакты и частицы рисуются прямо в браузере, даже звук.</p>
+                <ul class="tags"><li>Three.js</li><li>шейдеры</li><li>Web Audio</li></ul>
+                <div class="more" data-more>
+                  <button class="btn-pill" type="button" aria-expanded="false" aria-controls="more-pyr">Подробнее <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                  <div class="more__panel" id="more-pyr"><ul>
+                    <li>Пирамида разбирается вокруг курсора</li>
+                    <li>Песок продавливается и сам заглаживается</li>
+                    <li>Артефакты можно крутить мышкой</li>
+                    <li>Звук синтезируется в браузере — без аудиофайлов</li>
+                  </ul></div>
+                </div>
+                <div class="card__actions">
+                  <a class="btn-silver" href="https://almes37.github.io/almes37-pyramid/" target="_blank" rel="noopener noreferrer">Перейти на сайт <i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group__head" data-reveal>
+            <span class="group__num mono">02 —</span>
+            <h3>Для клиентов</h3>
+            <p>Сюда я буду добавлять сайты, сделанные для заказчиков.</p>
+          </div>
+
+          <div class="empty" data-reveal>
+            <div class="empty__slots" aria-hidden="true">
+              <div class="slot"><span class="slot__plus"></span><span class="mono">[ место 01 · свободно ]</span></div>
+              <div class="slot"><span class="slot__plus"></span><span class="mono">[ место 02 · свободно ]</span></div>
+              <div class="slot"><span class="slot__plus"></span><span class="mono">[ место 03 · свободно ]</span></div>
+            </div>
+            <div class="empty__text">
+              <h4>Пока работ нет — <em>стань первым</em></h4>
+              <p>Первый заказчик — первое место на этой витрине. Расскажи, какой сайт нужен, и он будет висеть здесь.</p>
+              <a class="btn-silver" href="#contact">Занять место <i aria-hidden="true">→</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 004 — Дизайн -->
+    <section class="design" id="design" aria-labelledby="design-title" data-section="004">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="label mono" data-reveal>[ 004 ] дизайн</p>
+          <h2 class="sec-title" id="design-title" data-reveal>Не только <em>сайты</em></h2>
+        </header>
+
+        <div class="design__grid">
+          <div class="design__text">
+            <p class="design__lead" data-reveal>
+              Кроме сайтов делаю дизайн под заказ — от постера до оформления соцсетей.
+              Формат, сроки и цену обговариваем лично: приходи с идеей, даже если она пока в двух словах.
+            </p>
+            <ul class="services" data-reveal>
+              <li><span class="mono">01</span>Постеры и обложки</li>
+              <li><span class="mono">02</span>Баннеры и реклама</li>
+              <li><span class="mono">03</span>Карточки для маркетплейсов</li>
+              <li><span class="mono">04</span>Оформление соцсетей</li>
+              <li><span class="mono">05</span>Всё остальное — <em>обсудим</em></li>
+            </ul>
+          </div>
+
+          <figure class="poster" data-reveal>
+            <canvas data-poster role="img" aria-label="Постер: чёрная Audi RS 7 ABT 2023 года в стиле битых данных — пиксели осыпаются оранжевым"></canvas>
+            <figcaption class="mono">[ эскиз ] Audi RS 7 ABT · 2023 — «битые данные». Рисуется прямо в браузере: наведи курсор.</figcaption>
+          </figure>
+        </div>
+
+        <div class="shelf" data-reveal>
+          <div class="toggle" role="tablist" aria-label="Какие работы показать" data-toggle>
+            <span class="toggle__knob" aria-hidden="true"><i></i></span>
+            <button type="button" role="tab" aria-selected="true" aria-controls="wip" data-tab="mine">мои работы</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="wip" data-tab="order">на заказ</button>
+          </div>
+          <div class="wip" id="wip" role="tabpanel" data-wip>
+            <p class="mono wip__tag"><span class="dot dot--amber" aria-hidden="true"></span>в разработке</p>
+            <h4 data-wip-title>Мои работы</h4>
+            <p data-wip-text>Собираю подборку — скоро здесь появятся постеры, обложки и другие мои работы.</p>
+            <div class="wip__bar" aria-hidden="true"><span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 005 — Связь -->
+    <section class="contact" id="contact" aria-labelledby="contact-title" data-section="005">
+      <div class="wrap">
+        <div class="plate" data-reveal>
+          <div class="plate__bg" aria-hidden="true"></div>
+          <div class="plate__inner">
+            <p class="label mono">[ 005 ] связь</p>
+            <h2 class="plate__title" id="contact-title">Есть идея?<br><em>Давай обсудим</em></h2>
+            <p class="plate__text">Пиши куда удобно — отвечаю сам, без менеджеров. Расскажи задачу, а я предложу, как сделать из неё сайт или дизайн, который запомнят.</p>
+
+            <div class="links">
+              <a class="link" href="#" data-link="tgChannel">
+                <span class="link__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Zm12-1.5a4.5 4.5 0 0 1 0 7m2.5-9.5a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="link__txt"><b>Telegram-канал</b><small class="mono" data-link-sub>скоро</small></span>
+                <i class="link__arr" aria-hidden="true">↗</i>
+              </a>
+              <a class="link" href="#" data-link="tg">
+                <span class="link__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="m21 4-18 7.2 6 2.3M21 4l-3.2 16-7.3-5.2M21 4 9 13.5m0 0 .6 6.2 2.9-4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="link__txt"><b>Telegram</b><small class="mono" data-link-sub>скоро</small></span>
+                <i class="link__arr" aria-hidden="true">↗</i>
+              </a>
+              <a class="link" href="#" data-link="vk">
+                <span class="link__ico link__ico--txt" aria-hidden="true">VK</span>
+                <span class="link__txt"><b>ВКонтакте</b><small class="mono" data-link-sub>скоро</small></span>
+                <i class="link__arr" aria-hidden="true">↗</i>
+              </a>
+              <a class="link" href="#" data-link="mail">
+                <span class="link__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="link__txt"><b>Почта</b><small class="mono" data-link-sub>скоро</small></span>
+                <i class="link__arr" aria-hidden="true">↗</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__big" aria-hidden="true" data-foot><span>A</span><span>L</span><span>M</span><span>E</span><span>S</span><span>3</span><span>7</span></div>
+    <div class="wrap foot__row mono">
+      <span>© 2026 ALMES37 · Широков Иван</span>
+      <span>сделано вручную — без шаблонов</span>
+      <a href="#top">наверх ↑</a>
+    </div>
+  </footer>
+
+  <div class="toast mono" role="status" aria-live="polite" data-toast></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="js/fibers.js" defer></script>
+  <script src="js/pixels.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
