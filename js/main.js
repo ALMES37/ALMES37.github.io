@@ -5,8 +5,8 @@
 /* Ссылки на соцсети. Когда появятся — впиши сюда адрес, и кнопка заработает.
    Пример: tgChannel: 'https://t.me/имя_канала', mail: 'mailto:почта@пример.ru' */
 const LINKS = {
-  tgChannel: '',
-  tg: '',
+  tgChannel: 'https://t.me/ALMES378',
+  tg: 'https://t.me/ALMES37',
   vk: '',
   mail: '',
 };
