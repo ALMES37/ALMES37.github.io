@@ -176,8 +176,12 @@ const LINKS = {
     }
     if (!hasGSAP || reduce || restore) return;
 
-    const fx = { open: 0, night: 0, untwist: 0, spread: 0 };
-    const push = () => window.fibersFX && window.fibersFX.set(fx);
+    // разлёт нитей в два шага: на первом экране они расходятся веером и остаются видны,
+    // а окончательно улетают и гаснут, пока снизу выезжает фото, — без пустого тёмного экрана
+    const fx = { open: 0, night: 0, untwist: 0, fan: 0, away: 0 };
+    const push = () => window.fibersFX && window.fibersFX.set({
+      open: fx.open, night: fx.night, untwist: fx.untwist, spread: fx.fan * .55 + fx.away * .45,
+    });
     const mobile = matchMedia('(max-width: 860px)').matches;
     ScrollTrigger.config({ ignoreMobileResize: true });
     gsap.set(stage, { '--open': 0 });
@@ -198,7 +202,13 @@ const LINKS = {
       .to(fx, { open: 1, duration: .55, ease: 'power2.inOut', onUpdate: push }, .06)
       .to('[data-night]', { opacity: 1, duration: .42, ease: 'power1.inOut' }, .2)
       .to(fx, { night: 1, duration: .42, ease: 'power1.inOut', onUpdate: push }, .2)
-      .to(fx, { spread: 1, duration: .4, ease: 'power2.in', onUpdate: push }, .6);
+      .to(fx, { fan: 1, duration: .4, ease: 'power1.inOut', onUpdate: push }, .6);
+
+    // первый экран уезжает вверх, снизу выезжает раздел с фото — нити улетают в стороны
+    awayTween = gsap.to(fx, {
+      away: 1, ease: 'power1.in', onUpdate: push,
+      scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'top top', scrub: .6 },
+    });
 
     // первый экран целиком ушёл вверх — убираем его насовсем
     goneTrigger = ScrollTrigger.create({
@@ -207,13 +217,14 @@ const LINKS = {
     });
   }
 
-  let heroTl = null, goneTrigger = null;
+  let heroTl = null, goneTrigger = null, awayTween = null;
   function dropHero(keepView) {
     if (heroGone || !heroEl) return;
     heroGone = true;
     const about = $('#about');
     const before = about.getBoundingClientRect().top;
     if (goneTrigger) goneTrigger.kill();
+    if (awayTween) { awayTween.scrollTrigger.kill(); awayTween.kill(); }
     if (heroTl) { heroTl.scrollTrigger.kill(); heroTl.kill(); }
     heroEl.hidden = true;
     const spacer = heroEl.parentElement;
