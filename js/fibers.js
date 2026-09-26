@@ -133,10 +133,18 @@
       const cx = bx + Math.cos(ca) * cl + dir * spread * W * .15;
       const cy = by + Math.sin(ca) * cl;
 
-      // точки нити: провод → веер (раскручивается от кончика к основанию)
+      const alpha = (.22 + s.z * .78) * fade;
+      if (alpha < .01) continue;
+
       ctx.beginPath();
       let px = 0, py = 0;
-      for (let i = 0; i <= N; i++) {
+      if (untwist >= 1) {
+        // провод уже раскручен — нить это просто кривая, одной командой вместо 64 отрезков
+        ctx.moveTo(bx, by);
+        ctx.quadraticCurveTo(cx, cy, tx, ty);
+        px = tx; py = ty;
+      } else for (let i = 0; i <= N; i++) {
+        // точки нити: провод → веер (раскручивается от кончика к основанию)
         const v = i / N, iv = 1 - v;
         const fx0 = iv * iv * bx + 2 * iv * v * cx + v * v * tx;
         const fy0 = iv * iv * by + 2 * iv * v * cy + v * v * ty;
@@ -149,7 +157,6 @@
         if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
       }
 
-      const alpha = (.22 + s.z * .78) * fade;
       const grad = ctx.createLinearGradient(bx, by, px, py);
       grad.addColorStop(0, `rgba(${c0},${alpha * lerp(1, .35, night)})`);
       grad.addColorStop(.72, `rgba(${c1},${alpha})`);

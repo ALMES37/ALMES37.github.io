@@ -23,7 +23,29 @@ const LINKS = {
   const store = {
     get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* приватный режим — не страшно */ } },
+    del(k) { try { sessionStorage.removeItem(k); } catch (e) { /* не страшно */ } },
   };
+
+  /* Первый экран «одноразовый»: когда он целиком ушёл вверх, он убирается, и вернуться к нему прокруткой нельзя.
+     Обновил страницу в начале — заставка играет снова; обновил в середине — сайт открывается там же, без заставки. */
+  const oneWay = hasGSAP && !reduce;
+  const heroEl = $('.hero');
+  let heroGone = false;
+  const savedRaw = oneWay ? parseFloat(store.get('pos')) : NaN;
+  const savedY = savedRaw > 40 ? savedRaw : NaN; // в самом верху сайта — это «начало»: снова показываем заставку
+  // ссылка вида …/#works, открытая впервые, ведёт сразу к разделу
+  const hashLink = location.hash.length > 1 && location.hash !== '#top' && Number.isNaN(savedRaw);
+  const restore = oneWay && (Number.isFinite(savedY) || hashLink);
+  if (oneWay) {
+    // место на странице запоминаем сами; через ScrollTrigger — иначе он вернёт браузеру «авто»
+    ScrollTrigger.clearScrollMemory('manual');
+    // заставка: страница начинается с самого верха, «#раздел» в адресе не должен её перепрыгивать
+    if (!restore && location.hash) {
+      history.replaceState(null, '', location.pathname + location.search);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }
+  const jump = (y) => window.scrollTo({ top: y, behavior: 'instant' });
 
   /* ---------- Шифр: перебор символов ---------- */
   const GLYPHS = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ#%&*/<>▒░▓';
@@ -109,7 +131,7 @@ const LINKS = {
   function intro() {
     const lines = $$('[data-line]');
     const bits = $$('[data-intro]');
-    if (!hasGSAP || reduce) {
+    if (!hasGSAP || reduce || restore) {
       if (power) power.style.display = 'none';
       return;
     }
@@ -118,16 +140,13 @@ const LINKS = {
     gsap.set(bits, { opacity: 0, y: 12 });
     gsap.set('[data-glow]', { opacity: 0 });
 
-    const seen = store.get('booted');
+    // заставка играет при каждом открытии и обновлении страницы в самом начале
     const signal = { skip: false };
     const skip = () => { signal.skip = true; };
-    if (!seen) {
-      addEventListener('pointerdown', skip, { once: true });
-      addEventListener('keydown', skip, { once: true });
-    }
+    addEventListener('pointerdown', skip, { once: true });
+    addEventListener('keydown', skip, { once: true });
 
-    (seen ? Promise.resolve() : typeBoot(signal)).then(() => {
-      store.set('booted', '1');
+    typeBoot(signal).then(() => {
       removeEventListener('pointerdown', skip);
       removeEventListener('keydown', skip);
       const beam = power.querySelector('i');
@@ -155,7 +174,7 @@ const LINKS = {
         metal.style.setProperty('--sheen', `${(e.clientX / innerWidth) * 100}%`);
       }, { passive: true });
     }
-    if (!hasGSAP || reduce) return;
+    if (!hasGSAP || reduce || restore) return;
 
     const fx = { open: 0, night: 0, untwist: 0, spread: 0 };
     const push = () => window.fibersFX && window.fibersFX.set(fx);
@@ -163,7 +182,7 @@ const LINKS = {
     ScrollTrigger.config({ ignoreMobileResize: true });
     gsap.set(stage, { '--open': 0 });
 
-    gsap.timeline({
+    heroTl = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
         trigger: '.hero', start: 'top top', end: mobile ? '+=110%' : '+=170%',
@@ -173,11 +192,43 @@ const LINKS = {
       .to(fx, { untwist: 1, duration: .42, ease: 'power1.inOut', onUpdate: push }, 0)
       .to('[data-screen-ui]', { opacity: 0, y: -50, duration: .28, ease: 'power2.in' }, 0)
       .to('[data-glow]', { opacity: 0, duration: .3 }, 0)
+      // тяжёлая тень рамки гаснет в начале раскрытия — её не нужно перерисовывать каждый кадр
+      .to('[data-frame]', { opacity: 0, duration: .2 }, .06)
       .to(stage, { '--open': 1, duration: .55, ease: 'power2.inOut' }, .06)
       .to(fx, { open: 1, duration: .55, ease: 'power2.inOut', onUpdate: push }, .06)
       .to('[data-night]', { opacity: 1, duration: .42, ease: 'power1.inOut' }, .2)
       .to(fx, { night: 1, duration: .42, ease: 'power1.inOut', onUpdate: push }, .2)
       .to(fx, { spread: 1, duration: .4, ease: 'power2.in', onUpdate: push }, .6);
+
+    // первый экран целиком ушёл вверх — убираем его насовсем
+    goneTrigger = ScrollTrigger.create({
+      trigger: '#about', start: 'top top',
+      onEnter: () => requestAnimationFrame(() => dropHero(true)),
+    });
+  }
+
+  let heroTl = null, goneTrigger = null;
+  function dropHero(keepView) {
+    if (heroGone || !heroEl) return;
+    heroGone = true;
+    const about = $('#about');
+    const before = about.getBoundingClientRect().top;
+    if (goneTrigger) goneTrigger.kill();
+    if (heroTl) { heroTl.scrollTrigger.kill(); heroTl.kill(); }
+    heroEl.hidden = true;
+    const spacer = heroEl.parentElement;
+    if (spacer && spacer.classList.contains('pin-spacer')) spacer.style.display = 'none';
+    root.classList.add('hero-gone');
+    ScrollTrigger.refresh();
+    // содержимое остаётся на месте — пропадает только то, что уже выше экрана
+    if (keepView) jump(scrollY + about.getBoundingClientRect().top - before);
+    savePos();
+  }
+
+  function savePos() {
+    if (!oneWay) return;
+    if (heroGone) store.set('pos', String(Math.round(scrollY)));
+    else store.del('pos');
   }
 
   /* ---------- Появление блоков при прокрутке ---------- */
@@ -240,8 +291,14 @@ const LINKS = {
       bar.classList.toggle('is-shown', e.boundingClientRect.top < innerHeight * .7);
     }, { threshold: [0, .01, .5, 1] }).observe(about);
     addEventListener('scroll', () => {
-      if (scrollY < 40) bar.classList.remove('is-shown');
+      if (scrollY < 40 && !heroGone) bar.classList.remove('is-shown');
     }, { passive: true });
+    // «наверх», когда первого экрана уже нет, — к началу сайта
+    $('.nav__brand').addEventListener('click', (e) => {
+      if (!heroGone) return;
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
 
     const io = new IntersectionObserver((es) => {
       es.forEach((e) => {
@@ -422,9 +479,29 @@ const LINKS = {
   wipToggle();
   socialLinks();
 
-  if (hasGSAP) {
+  if (restore) {
+    // обновили страницу в середине: первого экрана уже нет, возвращаемся туда, где остановились
+    dropHero(false);
+    const target = hashLink ? document.getElementById(location.hash.slice(1)) : null;
+    let moved = false; // человек уже листает сам — больше не двигаем страницу
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) => addEventListener(ev, () => { moved = true; }, { once: true, passive: true }));
+    const place = () => { if (!moved) jump(target ? target.getBoundingClientRect().top + scrollY : savedY); };
+    place();
+    // шрифты и картинки могли сдвинуть вёрстку — ставим на место ещё раз
+    if (document.fonts) document.fonts.ready.then(() => { ScrollTrigger.refresh(); place(); });
+    addEventListener('load', () => { ScrollTrigger.refresh(); place(); }, { once: true });
+  } else if (hasGSAP) {
     // пересчитать позиции, когда догрузятся шрифты и картинки
     if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
     addEventListener('load', () => ScrollTrigger.refresh());
+  }
+
+  if (oneWay) {
+    let saving = 0;
+    addEventListener('scroll', () => {
+      if (!saving) saving = requestAnimationFrame(() => { saving = 0; savePos(); });
+    }, { passive: true });
+    addEventListener('pagehide', savePos);
+    savePos();
   }
 })();
