@@ -1,0 +1,9 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:Миронова;Анна;;;
+FN;CHARSET=UTF-8:Анна Миронова
+TITLE;CHARSET=UTF-8:Дизайнер интерьера
+TEL;TYPE=CELL:+70000000000
+URL:https://almes37.github.io/vizitka-dizajner/
+NOTE;CHARSET=UTF-8:Пример электронной визитки от ALMES37. Данные условные.
+END:VCARD
