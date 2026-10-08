@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:Отвес;Бригада;;;
+FN;CHARSET=UTF-8:Отвес. Ремонт квартир
+ORG;CHARSET=UTF-8:Отвес
+TITLE;CHARSET=UTF-8:Ремонт квартир под ключ
+TEL;TYPE=CELL:+70000000000
+URL:https://almes37.github.io/vizitka-remont/
+NOTE;CHARSET=UTF-8:Пример электронной визитки от ALMES37. Данные условные.
+END:VCARD
