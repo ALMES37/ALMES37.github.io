@@ -1,0 +1,41 @@
+# Посты из группы ВК на сайт АРКСИС.
+# В рабочем репозитории сайта этот файл лежит в .github/workflows/vk-sync.yml,
+# а скрипт в auto-update/vk_sync.py.
+# Перед запуском: Settings → Secrets and variables → Actions → New repository secret,
+# имя VK_SERVICE_TOKEN, значение — сервисный ключ приложения ВК.
+name: Посты из ВК на сайт
+
+on:
+  schedule:
+    - cron: '17 * * * *'   # каждый час в :17 (время UTC)
+  workflow_dispatch:        # кнопка «Run workflow» для ручного запуска
+
+permissions:
+  contents: write           # только запись в этот репозиторий, больше ничего
+
+concurrency:
+  group: vk-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # в рабочей версии закрепить действия по SHA коммита, а не по тегу
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Забрать посты с #насайт
+        run: python auto-update/vk_sync.py
+        env:
+          VK_SERVICE_TOKEN: ${{ secrets.VK_SERVICE_TOKEN }}
+      - name: Сохранить, если что-то изменилось
+        run: |
+          git config user.name "vk-sync"
+          git config user.email "vk-sync@users.noreply.github.com"
+          git add data/vk-feed.json img/feed
+          git diff --cached --quiet || (git commit -m "Новые посты из ВК" && git push)
+      # Если сайт живёт на хостинге клиента, здесь добавляется шаг выкладки
+      # (FTP/SSH на хостинг). Пароль от хостинга тоже хранится в секретах.

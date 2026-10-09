@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ремонт квартир под ключ в Новосибирске | АРКСИС ГРУПП</title>
+<meta name="description" content="Ремонт квартир и домов под ключ в Новосибирске. Смета фиксируется в договоре, гарантия 15 лет, технический дизайн-проект в подарок. Расчёт за 24 часа.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://vkvideo.ru https://vk.com https://vk.ru; connect-src 'self'; form-action 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:type" content="website">
+<meta property="og:title" content="АРКСИС ГРУПП: инженерия, которая защищает ваши вложения">
+<meta property="og:description" content="Ремонт квартир и домов под ключ в Новосибирске. Набросок сайта.">
+<meta property="og:image" content="https://almes37.github.io/arksis/img/og.jpg">
+<meta property="og:url" content="https://almes37.github.io/arksis/">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#E8EBE8">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300..700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-collector.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"АРКСИС ГРУПП","description":"Ремонт квартир и домов под ключ, дизайн интерьера, малоэтажное строительство","telephone":["+7 983 120-85-00","+7 962 840-47-47"],"email":"arksis.nsk@mail.ru","address":{"@type":"PostalAddress","streetAddress":"ул. Николая Островского, 195","addressLocality":"Новосибирск","addressCountry":"RU"},"areaServed":"Новосибирск и Новосибирская область","sameAs":["https://vk.ru/arksis.group"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"45"}}
+</script>
+<style>
+:root{
+  --bg:#E8EBE8; --paper:#F4F5F2; --ink:#1C2321; --muted:#56605B; --line:#C3C9C5; --line-2:#D6DBD7;
+  --green:#2C7A35; --green-d:#22622A; --lime:#A8D84A; --tint:#DCE8D6; --note:#F5E58A; --note-ink:#4A4214;
+  --r:6px; --wrap:1240px; --pad:clamp(16px,4vw,40px);
+  --sh:0 18px 40px -18px rgba(28,35,33,.35);
+  --f:"Geologica",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--f);font-feature-settings:"tnum" 0;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:3px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--pad)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:clamp(1.9rem,3.3vw,2.9rem);line-height:1.08}
+h3{font-size:1.2rem;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+.lead{color:var(--muted);font-size:1.08rem;max-width:58ch;margin-top:1rem}
+section{padding-block:clamp(4.5rem,9vw,7.5rem)}
+.num{font-variant-numeric:tabular-nums}
+
+/* кнопки */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.35rem;border-radius:var(--r);border:1.5px solid transparent;font-weight:500;font-size:1rem;text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .2s,border-color .2s,transform .12s}
+.btn:active{transform:translateY(1px)}
+.btn-main{background:var(--green);color:#fff}
+.btn-main:hover{background:var(--green-d)}
+.btn-line{border-color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
+.btn-small{min-height:40px;padding:0 1rem;font-size:.95rem}
+
+/* пометки наброска */
+.ask{display:inline-block;background:var(--note);color:var(--note-ink);font-size:.72rem;font-weight:500;line-height:1;padding:.32em .5em;border-radius:3px;vertical-align:.15em;margin-left:.35em;white-space:nowrap}
+.sketch-note{background:var(--note);color:var(--note-ink);border-radius:var(--r);padding:1.1rem 1.2rem;font-size:.95rem;line-height:1.5;box-shadow:0 10px 24px -14px rgba(74,66,20,.6)}
+.sketch-note b{display:block;font-weight:600;margin-bottom:.25rem}
+
+/* шапка */
+.top{position:sticky;top:0;z-index:30;background:rgba(232,235,232,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}
+.top .wrap{display:flex;align-items:center;gap:1.5rem;height:68px}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-weight:600;letter-spacing:.01em}
+.brand img{width:36px;height:36px;border-radius:50%}
+.brand small{display:block;font-weight:400;font-size:.72rem;color:var(--muted);letter-spacing:0}
+.nav{display:flex;gap:1.6rem;margin-left:auto}
+.nav a{text-decoration:none;color:var(--muted);font-size:.95rem;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.top-phone{font-weight:500;text-decoration:none;white-space:nowrap}
+@media (max-width:1140px){.nav{display:none}.top-phone{margin-left:auto}}
+.brand span{white-space:nowrap}
+@media (max-width:560px){.top .wrap{height:58px;gap:.75rem}.top-phone{display:none}.brand small{display:none}.brand{font-size:.95rem;margin-right:auto}.brand img{width:32px;height:32px}}
+
+/* первый экран */
+.hero{padding-block:clamp(1.5rem,4vw,3rem) clamp(2rem,5vw,3.5rem)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;min-height:calc(100dvh - 68px - 5rem)}
+.hero h1{font-size:clamp(2.3rem,3.9vw,3.5rem);line-height:1.04;letter-spacing:-.03em;max-width:15ch}
+.hero .lead{font-size:clamp(1.05rem,1.4vw,1.2rem);margin-top:1.4rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.hero-visual{justify-self:end;width:100%;max-width:calc(min(100dvh - 190px, 760px) * .75)}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;min-height:0;gap:2rem}
+  .hero-visual{justify-self:stretch;max-width:520px;margin-inline:auto}
+}
+
+/* рентген стены */
+.xr{position:relative;aspect-ratio:3/4;border-radius:var(--r);overflow:hidden;background:#cdd1cd;box-shadow:var(--sh);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:crosshair}
+.xr-finish{position:absolute;inset:0;
+  --seam:linear-gradient(rgba(58,66,62,.34),rgba(58,66,62,.34));
+  background-image:
+    var(--seam),var(--seam),var(--seam),var(--seam),
+    linear-gradient(112deg,rgba(255,255,255,0) 28%,rgba(255,255,255,.38) 40%,rgba(255,255,255,0) 52%),
+    radial-gradient(120% 80% at 20% 0%,rgba(255,255,255,.5),rgba(255,255,255,0) 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .05' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .38  0 0 0 0 .37  0 0 0 .32 -.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(170deg,#e4e6e3,#d3d7d3 55%,#c8ccc8);
+  background-size:100% 2px,100% 2px,2px 100%,2px 100%,100% 100%,100% 100%,300px 300px,100% 100%;
+  background-position:0 30%,0 67.5%,33.333% 0,66.666% 0,0 0,0 0,0 0,0 0;
+  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,repeat,no-repeat}
+.xr-door{position:absolute;left:33.333%;top:30%;width:33.333%;height:37.5%;border-radius:2px;box-shadow:inset 0 0 0 2px rgba(40,48,45,.42),inset 0 2px 0 rgba(255,255,255,.45),0 0 0 1px rgba(255,255,255,.3)}
+
+.xr-door::after{content:"";position:absolute;left:3%;right:3%;bottom:-7px;height:4px;border-radius:3px;background:#fff7e0;box-shadow:0 0 22px 8px rgba(255,232,180,.6),0 0 4px 1px rgba(255,240,205,.9)}
+.xr-flush{position:absolute;left:50%;top:84%;width:24%;aspect-ratio:2/1.15;transform:translate(-50%,-50%);border-radius:5px;background:linear-gradient(180deg,#f7f8f6,#d6d9d5);box-shadow:0 3px 8px rgba(30,38,35,.22),inset 0 1px 0 #fff,inset 0 0 0 1px rgba(40,48,45,.18)}
+.xr-flush::before,.xr-flush::after{content:"";position:absolute;top:50%;width:30%;aspect-ratio:1;border-radius:50%;transform:translateY(-50%);background:radial-gradient(circle at 40% 35%,#ffffff,#c3c8c4 70%);box-shadow:inset 0 0 0 1.5px rgba(40,48,45,.3)}
+.xr-flush::before{left:14%}.xr-flush::after{right:14%;width:38%;}
+.xr-inside{position:absolute;inset:0;clip-path:circle(var(--lr,0px) at var(--x,50%) var(--y,50%));will-change:clip-path}
+.xr-inside img{width:100%;height:100%;object-fit:cover}
+.xr-inside::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(168,216,74,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(168,216,74,.16) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.xr-ring{position:absolute;left:0;top:0;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;pointer-events:none;border:1.5px solid var(--lime);box-shadow:0 0 0 7px rgba(168,216,74,.16),0 16px 34px rgba(10,20,15,.38);transform:translate(var(--x,50%),var(--y,50%)) scale(var(--k,1));will-change:transform;transition:opacity .3s}
+.xr-ring::before{content:"";position:absolute;inset:-1px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(246,250,240,.9) 0 .8deg,transparent .8deg 10deg);-webkit-mask:radial-gradient(circle,transparent calc(100% - 9px),#000 calc(100% - 8px));mask:radial-gradient(circle,transparent calc(100% - 9px),#000 calc(100% - 8px))}
+.xr.is-open .xr-ring{opacity:0}
+.xr-spot{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:0;background:transparent;cursor:pointer;padding:0;display:grid;place-items:center}
+.xr-spot::before{content:"";width:12px;height:12px;border-radius:50%;border:1.5px solid rgba(28,35,33,.55);background:rgba(244,245,242,.55);transition:transform .2s,background-color .2s}
+.xr-spot:hover::before,.xr-spot.is-on::before{transform:scale(1.25);background:var(--lime);border-color:var(--ink)}
+.xr-tip{position:absolute;max-width:min(270px,62%);padding:.75rem .9rem .8rem;border-radius:var(--r);background:rgba(23,30,28,.92);color:#EEF1EC;font-size:.9rem;line-height:1.42;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;border-left:3px solid var(--lime)}
+.xr-tip.is-on{opacity:1;transform:none}
+.xr-tip strong{display:block;font-weight:600;color:#fff;margin-bottom:.15rem;font-size:.95rem}
+.xr-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.9rem;font-size:.9rem;color:var(--muted)}
+.xr-bar .btn{flex:none}
+.xr-tip.is-dock{left:10px;right:10px;top:auto;bottom:10px;max-width:none}
+@media (max-width:560px){.xr-bar{flex-direction:column;align-items:flex-start;gap:.6rem}}
+@media (prefers-reduced-motion:reduce){.xr-tip,.xr-spot::before,.xr-ring{transition:none}}
+
+/* штамп */
+.stamp{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--ink);border-radius:var(--r);background:var(--paper)}
+.stamp div{padding:1rem 1.2rem 1.15rem;border-left:1px solid var(--ink)}
+.stamp div:first-child{border-left:0}
+.stamp span{display:block;font-size:.82rem;color:var(--muted)}
+.stamp b{display:block;font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-top:.15rem}
+.stamp small{font-size:.86rem;color:var(--muted)}
+@media (max-width:760px){.stamp{grid-template-columns:1fr 1fr}.stamp div:nth-child(3){border-left:0}.stamp div:nth-child(n+3){border-top:1px solid var(--ink)}}
+
+/* что спрятано за отделкой */
+.eng-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,4.5rem);margin-top:3rem;align-items:start}
+.cut{margin:0;position:sticky;top:96px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:1.2rem}
+.cut svg{width:100%;height:auto;display:block}
+.cut figcaption{font-size:.85rem;color:var(--muted);margin-top:.6rem}
+.cut .band{transition:fill .25s}
+.cut [data-layer] .hl{fill:var(--tint);opacity:0;transition:opacity .25s}
+.cut [data-layer].is-on .hl{opacity:1}
+.cut [data-layer].is-on .mark circle{fill:var(--green);stroke:var(--green)}
+.cut [data-layer].is-on .mark text{fill:#fff}
+.layers{display:grid;gap:1.1rem;counter-reset:l}
+.layer{display:grid;grid-template-columns:150px minmax(0,1fr);gap:1.25rem;padding:1.25rem;border-radius:var(--r);border:1px solid transparent;transition:border-color .25s,background-color .25s}
+.layer.is-on{background:var(--paper);border-color:var(--line)}
+.layer-pic{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:3/4;background:#cfd4d0}
+.layer-pic img{width:100%;height:100%;object-fit:cover}
+.layer-pic button{all:unset;cursor:pointer;display:block;width:100%;height:100%}
+.layer-pic .play{position:absolute;left:8px;bottom:8px;background:rgba(23,30,28,.85);color:#fff;font-size:.78rem;padding:.3rem .5rem;border-radius:3px}
+.layer h3 .n{display:inline-grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;border:1.5px solid currentColor;font-size:.8rem;margin-right:.5rem;vertical-align:.1em}
+.layer p{margin-top:.55rem;color:var(--muted)}
+.layer .why{color:var(--ink);margin-top:.7rem;padding-left:.8rem;border-left:2px solid var(--green)}
+.layer .money{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.7rem;font-size:.92rem}
+.layer .money b{font-weight:600}
+@media (max-width:900px){.eng-grid{grid-template-columns:1fr}.cut{position:relative;top:0}}
+@media (max-width:520px){.layer{grid-template-columns:96px minmax(0,1fr);padding:1rem .25rem;gap:1rem}}
+
+/* кейс */
+.case{background:var(--ink);color:#E9EDE9}
+.case .lead{color:#AEB8B2}
+.case-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.steps-case{list-style:none;margin:2.2rem 0 0;padding:0;display:grid;gap:1.4rem}
+.steps-case li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1rem;padding-top:1.2rem;border-top:1px solid #3A4541}
+.steps-case b{font-weight:600;color:var(--lime)}
+.ledger{display:grid;grid-template-columns:1fr 1fr;margin-top:2.2rem;border:1px solid #3A4541;border-radius:var(--r)}
+.ledger div{padding:1rem 1.2rem}
+.ledger div+div{border-left:1px solid #3A4541}
+.ledger span{display:block;font-size:.85rem;color:#AEB8B2}
+.ledger b{display:block;font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:600;letter-spacing:-.02em;margin-top:.2rem}
+.ledger .loss b{color:#F2B8A8}
+.case figure{margin:0}
+.case figure img{border-radius:var(--r);aspect-ratio:3/4;object-fit:cover;width:100%}
+.case figcaption{font-size:.85rem;color:#AEB8B2;margin-top:.6rem}
+@media (max-width:860px){.case-grid{grid-template-columns:1fr}.case figure{max-width:420px}.steps-case li{grid-template-columns:1fr;gap:.2rem}}
+
+/* лента из ВК */
+.feed-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem}
+.feed-status{display:flex;align-items:center;gap:.6rem;font-size:.92rem;color:var(--muted);margin-top:1rem}
+.feed-status i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(44,122,53,.18)}
+.feed-wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:2rem;margin-top:2.5rem;align-items:start}
+.feed{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem}
+.post{position:relative;background:var(--paper);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line-2)}
+.post-pic{all:unset;cursor:pointer;display:block;position:relative;aspect-ratio:4/3;background:#cfd4d0;overflow:hidden}
+.post-pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.post-pic:hover img{transform:scale(1.03)}
+.post-pic .count{position:absolute;right:8px;bottom:8px;background:rgba(23,30,28,.82);color:#fff;font-size:.78rem;padding:.25rem .5rem;border-radius:3px}
+.post-body{padding:.9rem 1rem 1.05rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
+.post-meta{display:flex;justify-content:space-between;gap:.5rem;font-size:.8rem;color:var(--muted)}
+.post h3{font-size:1.05rem}
+.post p{font-size:.92rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.post a{font-size:.88rem;color:var(--green);text-decoration:none;font-weight:500;margin-top:auto;padding-top:.3rem}
+.post a:hover{text-decoration:underline}
+.post.is-big{grid-column:span 2;grid-row:span 2}
+.post.is-big .post-pic{aspect-ratio:auto;flex:1 1 auto;min-height:320px}
+.post.is-big .post-body{flex:none}
+.post.is-big h3{font-size:1.3rem}
+.post.is-new{outline:2px solid var(--green);outline-offset:-2px}
+.post .badge{position:absolute;left:10px;top:10px;z-index:2;background:var(--green);color:#fff;font-size:.78rem;font-weight:500;padding:.3rem .55rem;border-radius:3px}
+.post.skel{min-height:300px;background:linear-gradient(100deg,#e3e6e3 30%,#eef0ed 50%,#e3e6e3 70%) 0 0/300% 100%;animation:sk 1.4s linear infinite;border:0}
+@keyframes sk{to{background-position:-150% 0}}
+@media (prefers-reduced-motion:reduce){.post.skel{animation:none}.post-pic img{transition:none}}
+.feed-more{margin-top:1.4rem}
+.feed-error{grid-column:1/-1;padding:2rem;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted)}
+.feed-aside{position:sticky;top:96px;display:grid;gap:1rem}
+.clips-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-top:3.5rem}
+.clips-head h3{font-size:1.35rem}
+.clips{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,180px);gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.8rem;margin-top:1.2rem;scrollbar-width:thin}
+.clip{all:unset;cursor:pointer;scroll-snap-align:start;display:block}
+.clip .c-pic{display:block;position:relative;aspect-ratio:9/16;border-radius:var(--r);overflow:hidden;background:#cfd4d0}
+.clip img{width:100%;height:100%;object-fit:cover}
+.clip .c-pic::after{content:"";position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(23,30,28,.72) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='%23fff'/%3E%3C/svg%3E") center/22px no-repeat}
+.clip b{display:block;font-weight:500;font-size:.88rem;line-height:1.3;margin-top:.5rem}
+.clip > span:last-child{display:block;font-size:.8rem;color:var(--muted)}
+.clip:focus-visible .c-pic{outline:2px solid var(--green);outline-offset:2px}
+@media (max-width:1020px){.feed-wrap{grid-template-columns:1fr;gap:1.2rem}.feed-aside{position:relative;top:0;grid-template-columns:1fr 1fr;order:-1}}
+@media (max-width:760px){.feed{grid-template-columns:1fr 1fr}.post.is-big{grid-column:span 2;grid-row:auto}.post.is-big .post-pic{min-height:0;aspect-ratio:4/3}.feed-aside{grid-template-columns:1fr}}
+@media (max-width:480px){.feed{grid-template-columns:1fr}.post.is-big{grid-column:auto}}
+
+/* окна: галерея и видео */
+dialog{border:0;padding:0;border-radius:var(--r);background:var(--paper);color:var(--ink);max-width:min(920px,calc(100vw - 24px));width:100%;max-height:calc(100dvh - 24px);box-shadow:0 30px 80px rgba(0,0,0,.4)}
+dialog::backdrop{background:rgba(16,22,20,.72)}
+.dlg-close{position:absolute;right:10px;top:10px;z-index:3;width:42px;height:42px;border-radius:50%;border:0;background:rgba(23,30,28,.8);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
+.gal{display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;scroll-snap-type:x mandatory;background:#141a18}
+.gal img{scroll-snap-align:center;width:100%;height:min(66dvh,620px);object-fit:contain}
+.dlg-text{padding:1.2rem 1.4rem 1.5rem;display:grid;gap:.5rem}
+.dlg-text .post-meta{justify-content:flex-start;gap:1rem}
+.video-box{background:#000;aspect-ratio:9/16;max-height:calc(100dvh - 24px);margin-inline:auto}
+#dlgVideo{max-width:min(420px,calc(100vw - 24px));background:#000}
+#dlgVideo iframe{width:100%;height:100%;border:0;display:block}
+
+/* кто отвечает */
+.who{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.who img{border-radius:var(--r);aspect-ratio:3/4;object-fit:cover;object-position:60% 18%;width:100%;max-width:420px}
+.who blockquote{margin:1.6rem 0 0;font-size:clamp(1.3rem,2.2vw,1.75rem);line-height:1.3;font-weight:500;letter-spacing:-.015em;max-width:30ch}
+.who cite{display:block;font-style:normal;font-size:.95rem;color:var(--muted);margin-top:.8rem;font-weight:400;letter-spacing:0}
+.control{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2rem}
+.control div{padding-top:.8rem;border-top:2px solid var(--ink)}
+.control b{display:block;font-weight:600}
+.control span{font-size:.92rem;color:var(--muted)}
+@media (max-width:760px){.who{grid-template-columns:1fr}.control{grid-template-columns:1fr}}
+
+/* как идёт работа */
+.flow{list-style:none;margin:3rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.4rem 2rem;counter-reset:s}
+.flow li{counter-increment:s;position:relative;padding-top:2.9rem}
+.flow li::before{content:counter(s);position:absolute;left:0;top:0;width:2.1rem;height:2.1rem;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--ink);font-weight:600;font-size:.95rem}
+.flow li::after{content:"";position:absolute;left:2.6rem;right:-1rem;top:1.05rem;height:1px;background:var(--line)}
+.flow li:nth-child(3n)::after{display:none}
+.flow h3{font-size:1.15rem}
+.flow p{color:var(--muted);margin-top:.45rem;font-size:.98rem}
+@media (max-width:860px){.flow{grid-template-columns:1fr}.flow li::after{display:none}.flow li{padding:0 0 0 3.2rem}}
+
+/* цены */
+.prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;margin-top:2.6rem}
+.pgroup{background:var(--paper);border:1px solid var(--line-2);border-radius:var(--r);padding:1.3rem 1.3rem 1.4rem}
+.pgroup h3{font-size:1.1rem;margin-bottom:.9rem}
+.prow{display:flex;align-items:baseline;gap:.5rem;padding:.42rem 0;font-size:.97rem}
+.prow span:first-child{flex:none;max-width:62%}
+.prow i{flex:1;border-bottom:1px dotted #9aa39e;transform:translateY(-.3em)}
+.prow b{font-weight:600;white-space:nowrap;text-align:right}
+.pgroup .note{font-size:.88rem;color:var(--muted);margin-top:.8rem}
+@media (max-width:900px){.prices{grid-template-columns:1fr}}
+
+/* расчёт */
+.calc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.alt{margin-top:2rem;display:grid;gap:.9rem}
+.alt a.phone{font-size:1.25rem;font-weight:600;text-decoration:none}
+.rating{display:inline-flex;align-items:baseline;gap:.5rem;margin-top:1.6rem;font-size:.95rem;color:var(--muted);text-decoration:none}
+.rating:hover span{text-decoration:underline}
+.rating b{font-size:1.5rem;color:var(--ink);font-weight:600}
+form.lead-form{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.2rem,3vw,2rem);display:grid;gap:1.15rem}
+.field{display:grid;gap:.4rem}
+.field label,.field legend{font-size:.92rem;font-weight:500;padding:0}
+.field input[type=text],.field input[type=tel],.field input[type=number]{height:50px;border:1.5px solid #9AA39E;border-radius:var(--r);padding:0 .9rem;font:inherit;background:#fff;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(44,122,53,.2)}
+.field small{font-size:.82rem;color:var(--muted)}
+fieldset.field{border:0;margin:0;padding:0}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1.5px solid #9AA39E;border-radius:var(--r);overflow:hidden}
+.seg label{position:relative;text-align:center;padding:.75rem .4rem;cursor:pointer;font-weight:400;font-size:.95rem;border-left:1px solid #9AA39E;background:#fff}
+.seg label:first-child{border-left:0}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--ink);color:var(--paper)}
+.seg label:has(input:focus-visible){outline:2px solid var(--green);outline-offset:-4px}
+.check{display:flex;gap:.6rem;align-items:flex-start;font-size:.88rem;color:var(--muted)}
+.check input{width:20px;height:20px;margin:.1rem 0 0;accent-color:var(--green);flex:none}
+.hp{position:absolute;left:-9999px}
+.form-status{font-size:.92rem;padding:.8rem 1rem;border-radius:var(--r);background:var(--tint);display:none}
+.form-status.is-on{display:block}
+.form-status.err{background:#F6DDD5}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+
+/* подвал */
+.foot{background:var(--ink);color:#DDE3DE;padding-block:4rem 2rem}
+.foot a{text-decoration:none}
+.foot-phone{font-size:clamp(2.2rem,7vw,5.6rem);font-weight:600;letter-spacing:-.035em;line-height:1;display:inline-block;color:#fff}
+.foot-phone:hover{color:var(--lime)}
+.foot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid #3A4541;font-size:.93rem;color:#AEB8B2}
+.foot-grid b{display:block;color:#fff;font-weight:500;margin-bottom:.4rem}
+.foot-grid a:hover{color:#fff}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:3rem;font-size:.82rem;color:#7F8B85}
+@media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.foot-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="АРКСИС ГРУПП, в начало"><img src="img/logo.jpg" alt="" width="36" height="36"><span>АРКСИС ГРУПП<small>ремонт и отделка, Новосибирск</small></span></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#inzheneriya">Инженерия</a>
+      <a href="#obekty">Объекты</a>
+      <a href="#rabota">Как работаем</a>
+      <a href="#ceny">Цены</a>
+    </nav>
+    <a class="top-phone num" href="tel:+79831208500">+7 983 120-85-00</a>
+    <a class="btn btn-main btn-small" href="#raschet">Получить расчёт</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <div>
+      <h1 id="h1">Инженерия, которая защищает ваши вложения</h1>
+      <p class="lead">Ремонт квартир и домов под ключ в Новосибирске. Смета фиксируется в договоре, гарантия 15 лет.</p>
+      <div class="hero-cta">
+        <a class="btn btn-main" href="#raschet">Получить расчёт</a>
+        <a class="btn btn-line" href="#obekty">Смотреть объекты</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="xr" id="xr" role="group" aria-label="Стена с плиткой. Под отделкой коллекторный узел с объекта в ЖК «Декабристов». Кнопки на стене показывают узлы.">
+        <div class="xr-finish" aria-hidden="true"><div class="xr-door"></div><div class="xr-flush"></div></div>
+        <div class="xr-inside"><img src="img/hero-collector.jpg" alt="Коллекторный узел под отделкой: редуктор, коллектор с подписанными линиями, канализация в звукоизоляции" width="1080" height="1440" fetchpriority="high"></div>
+        <div class="xr-ring" aria-hidden="true"></div>
+        <button class="xr-spot" type="button" style="left:52%;top:60%" data-x="52" data-y="60" data-t="Коллектор" data-d="Каждый прибор на своей линии, все линии подписаны: унитаз, ванна, душ, мойка." aria-label="Коллектор"></button>
+        <button class="xr-spot" type="button" style="left:11%;top:23%" data-x="11" data-y="23" data-t="Редуктор давления" data-d="Гасит ночные скачки давления до 7 бар. Техника и смесители рассчитаны на 3–4 бар." aria-label="Редуктор давления"></button>
+        <button class="xr-spot" type="button" style="left:17%;top:9%" data-x="17" data-y="9" data-t="Манометр" data-d="Давление в системе видно сразу, без вызова мастера." aria-label="Манометр"></button>
+        <button class="xr-spot" type="button" style="left:14%;top:82%" data-x="14" data-y="82" data-t="Канализация в звукоизоляции" data-d="Канализацию и инсталляцию зашили в звукоизоляцию. Смыв ночью не слышно." aria-label="Канализация в звукоизоляции"></button>
+        <div class="xr-tip" id="xrTip" aria-live="polite"><strong></strong><span></span></div>
+      </div>
+      <div class="xr-bar">
+        <span id="xrHint">Коллекторный узел, ЖК «Декабристов». Наведите на стену.</span>
+        <button class="btn btn-line btn-small" type="button" id="xrToggle" aria-pressed="false">Снять отделку</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stamp" aria-label="Коротко о компании">
+    <div><span>Опыт</span><b class="num">18 лет</b><small>в ремонте и строительстве</small></div>
+    <div><span>Объекты</span><b class="num">300+</b><small>Новосибирск и область</small></div>
+    <div><span>Гарантия</span><b class="num">15 лет</b><small>прописана в договоре</small></div>
+    <div><span>Оценка в ВК</span><b class="num">4,9</b><small>45 отзывов</small></div>
+  </div>
+</div>
+
+<section id="inzheneriya" aria-labelledby="h-eng">
+  <div class="wrap">
+    <h2 id="h-eng">Что спрятано за отделкой</h2>
+    <p class="lead">Эти работы закрывают плиткой и штукатуркой. Через год по ним видно, кто делал ремонт. Показываем на своих объектах, что делаем и от чего это защищает.</p>
+
+    <div class="eng-grid">
+      <figure class="cut" aria-hidden="true">
+        <svg viewBox="0 0 520 440">
+          <defs>
+            <pattern id="hConcrete" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="14" stroke="#7d8781" stroke-width="1.2"/></pattern>
+            <pattern id="hDots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#8b948f"/><circle cx="6.5" cy="6.5" r=".8" fill="#8b948f"/></pattern>
+            <pattern id="hWool" width="26" height="20" patternUnits="userSpaceOnUse"><path d="M0 10 Q6.5 0 13 10 T26 10" fill="none" stroke="#8b948f" stroke-width="1.2"/></pattern>
+          </defs>
+          <text x="24" y="420" font-size="13" fill="#56605B">комната</text>
+          <text x="440" y="420" font-size="13" fill="#56605B">бетон</text>
+          <!-- 1 плитка и зазор -->
+          <g data-layer="1">
+            <rect class="hl" x="96" y="40" width="26" height="350"/>
+            <rect x="100" y="70" width="18" height="320" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.2"/>
+            <g stroke="#1C2321" stroke-width="1"><line x1="100" y1="150" x2="118" y2="150"/><line x1="100" y1="230" x2="118" y2="230"/><line x1="100" y1="310" x2="118" y2="310"/></g>
+            <rect x="100" y="40" width="18" height="30" fill="url(#hDots)" stroke="#1C2321" stroke-width="1" stroke-dasharray="3 2"/>
+            <g class="mark"><line x1="109" y1="34" x2="109" y2="24" stroke="#1C2321"/><circle cx="109" cy="14" r="12" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.2"/><text x="109" y="18.5" font-size="13" text-anchor="middle" fill="#1C2321" font-weight="600">1</text></g>
+          </g>
+          <!-- 2 штукатурка на сетке -->
+          <g data-layer="2">
+            <rect class="hl" x="120" y="40" width="40" height="350"/>
+            <rect x="118" y="40" width="38" height="350" fill="url(#hDots)" stroke="#1C2321" stroke-width="1.2"/>
+            <line x1="140" y1="44" x2="140" y2="386" stroke="#2C7A35" stroke-width="1.4" stroke-dasharray="5 3"/>
+            <g class="mark"><line x1="137" y1="34" x2="137" y2="24" stroke="#1C2321"/><circle cx="137" cy="14" r="12" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.2"/><text x="137" y="18.5" font-size="13" text-anchor="middle" fill="#1C2321" font-weight="600">2</text></g>
+          </g>
+          <!-- 3 звукоизоляция: ГВЛ + минвата + подрозетник -->
+          <g data-layer="3">
+            <rect class="hl" x="158" y="40" width="88" height="350"/>
+            <rect x="156" y="40" width="14" height="350" fill="#E4E7E4" stroke="#1C2321" stroke-width="1.2"/>
+            <rect x="170" y="40" width="72" height="350" fill="url(#hWool)" stroke="#1C2321" stroke-width="1.2"/>
+            <rect x="150" y="180" width="30" height="34" rx="3" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.4"/>
+            <rect x="176" y="176" width="6" height="42" fill="#1C2321"/>
+            <g class="mark"><line x1="206" y1="34" x2="206" y2="24" stroke="#1C2321"/><circle cx="206" cy="14" r="12" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.2"/><text x="206" y="18.5" font-size="13" text-anchor="middle" fill="#1C2321" font-weight="600">3</text></g>
+          </g>
+          <!-- 4 электрика -->
+          <g data-layer="4">
+            <rect class="hl" x="244" y="40" width="96" height="140"/>
+            <g fill="none" stroke="#1C2321" stroke-width="1.4"><circle cx="268" cy="80" r="7"/><circle cx="290" cy="80" r="7"/><circle cx="312" cy="80" r="7"/></g>
+            <rect x="258" y="112" width="64" height="44" rx="4" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.2"/>
+            <path d="M270 134h40" stroke="#2C7A35" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="290" cy="134" r="4.5" fill="#2C7A35"/>
+            <g class="mark"><line x1="292" y1="34" x2="292" y2="24" stroke="#1C2321"/><circle cx="292" cy="14" r="12" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.2"/><text x="292" y="18.5" font-size="13" text-anchor="middle" fill="#1C2321" font-weight="600">4</text></g>
+          </g>
+          <!-- 5 вода -->
+          <g data-layer="5">
+            <rect class="hl" x="244" y="190" width="96" height="200"/>
+            <g fill="#F4F5F2" stroke="#1C2321" stroke-width="1.4"><circle cx="270" cy="250" r="13"/><circle cx="310" cy="250" r="13"/><circle cx="290" cy="330" r="22"/></g>
+            <g fill="none" stroke="#1C2321" stroke-width="5" opacity=".18"><circle cx="270" cy="250" r="17"/><circle cx="310" cy="250" r="17"/><circle cx="290" cy="330" r="27"/></g>
+            <circle cx="270" cy="250" r="5" fill="#1C2321"/><circle cx="310" cy="250" r="5" fill="#1C2321"/>
+            <g class="mark"><line x1="290" y1="356" x2="290" y2="400" stroke="#1C2321"/><circle cx="290" cy="414" r="12" fill="#F4F5F2" stroke="#1C2321" stroke-width="1.2"/><text x="290" y="418.5" font-size="13" text-anchor="middle" fill="#1C2321" font-weight="600">5</text></g>
+          </g>
+          <!-- бетон -->
+          <rect x="340" y="40" width="140" height="350" fill="url(#hConcrete)" stroke="#1C2321" stroke-width="1.6"/>
+          
+          <line x1="20" y1="40" x2="500" y2="40" stroke="#1C2321" stroke-width="1.6"/>
+          <line x1="20" y1="390" x2="500" y2="390" stroke="#1C2321" stroke-width="1.6"/>
+        </svg>
+        <figcaption>Разрез стены санузла. Цифры совпадают с пунктами справа.</figcaption>
+      </figure>
+
+      <div class="layers">
+        <article class="layer" data-layer="1">
+          <div class="layer-pic"><img src="img/eng-gap.jpg" alt="Керамогранит в санузле с зазором под потолком" loading="lazy" width="540" height="553"></div>
+          <div>
+            <h3><span class="n">1</span>Зазор 10 см между плиткой и потолком</h3>
+            <p>Керамогранит не доводим до потолка вплотную. Зазор выводим штукатуркой в уровень с плиткой.</p>
+            <p class="why">Дом даёт усадку, и жёсткий стык трескается. Багет натяжного потолка крепится в штукатурку, керамогранит сверлить не приходится.</p>
+          </div>
+        </article>
+        <article class="layer" data-layer="2">
+          <div class="layer-pic"><img src="img/eng-walls.jpg" alt="Стены из газоблока на объекте перед штукатуркой" loading="lazy" width="540" height="670"></div>
+          <div>
+            <h3><span class="n">2</span>Штукатурка на насечках и сетке</h3>
+            <p>Старую штукатурку проверяем простукиванием. По основанию делаем насечки под 45°, щелочестойкую сетку 5×5 мм утапливаем во второй слой с нахлёстом 10 см.</p>
+            <p class="why">Защищает от трещин и отвалившейся плитки. Ремонт делается один раз, дальше только косметика.</p>
+          </div>
+        </article>
+        <article class="layer" data-layer="3">
+          <div class="layer-pic"><img src="img/eng-sockets.jpg" alt="Обычные подрозетники в звукоизолированной стене" loading="lazy" width="540" height="368"></div>
+          <div>
+            <h3><span class="n">3</span>Шумоизоляционные подрозетники</h3>
+            <p>В звукоизолированной стене ставим подрозетники с герметичной крышкой и уплотнителем. Канализацию и инсталляцию зашиваем в звукоизоляцию.</p>
+            <p class="why">Случай из ЖК «Декабристов»: заказчик вложил 160 000 ₽ в шумоизоляцию, а электрик поставил 10 обычных подрозетников. Замер показал 41 дБ вместо расчётных 56.</p>
+            <div class="money"><span>Переделка: <b class="num">43 000 ₽</b></span><span>Задержка: <b>3 недели</b></span></div>
+          </div>
+        </article>
+        <article class="layer" data-layer="4">
+          <div class="layer-pic"><button type="button" data-clip="456239752" aria-label="Смотреть клип: варим распаечные коробки"><img src="img/feed/clip_456239752.jpg" alt="" loading="lazy" width="360" height="640"><span class="play">Клип, 24,8 тыс. просмотров</span></button></div>
+          <div>
+            <h3><span class="n">4</span>Провода соединяем сваркой</h3>
+            <p>Скрутку сваривают, и два провода становятся одним. В соединении нет зазора, пружины и окисла, которым нагреваться через годы.</p>
+            <p class="why">Защищает от нагрева в распаячной коробке и пожара.</p>
+          </div>
+        </article>
+        <article class="layer" data-layer="5">
+          <div class="layer-pic"><img src="img/eng-collector.jpg" alt="Коллектор с подписанными линиями к приборам" loading="lazy" width="720" height="960"></div>
+          <div>
+            <h3><span class="n">5</span>Коллектор и Аквастоп</h3>
+            <p>Каждый прибор на своей линии от коллектора. Датчик протечки перекрывает воду за несколько секунд, даже когда вы в отпуске.</p>
+            <p class="why">Аквастоп ставим в каждую квартиру, с любой сантехникой.</p>
+            <div class="money"><span>Затопить соседей снизу: <b class="num">от 100 000 ₽</b></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case" aria-labelledby="h-case">
+  <div class="wrap case-grid">
+    <div>
+      <h2 id="h-case">Деталь за 10 000 ₽, которую хотели вычеркнуть</h2>
+      <p class="lead">Комплексный ремонт в мкр. «Родники». Заказчик убрал из сметы мембранный редуктор давления: соседи живут без него.</p>
+      <ol class="steps-case">
+        <li><b>Смета</b><span>Мы настояли на монтаже. Ночью в плотной новостройке давление скачет до 7 бар, а встроенная техника и смесители рассчитаны на 3–4.</span></li>
+        <li><b>Через месяц</b><span>Коммунальщики дали скачок давления. У соседей по стояку «поплыли» инсталляции и порвало гибкие подводки.</span></li>
+        <li><b>У нашего клиента</b><span>Редуктор погасил удар. Техника и чистовая отделка целы.</span></li>
+      </ol>
+      <div class="ledger">
+        <div><span>Редуктор с установкой</span><b class="num">≈ 10 000 ₽</b></div>
+        <div class="loss"><span>Затопление кухни с паркетом и техникой</span><b class="num">от 300 000 ₽</b></div>
+      </div>
+    </div>
+    <figure>
+      <img src="img/eng-reducer.jpg" alt="Мембранный редуктор давления с манометром на вводе" loading="lazy" width="720" height="960">
+      <figcaption>Редуктор давления на вводе. Объект в ЖК «Декабристов».</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="obekty" aria-labelledby="h-feed">
+  <div class="wrap">
+    <div class="feed-head">
+      <div>
+        <h2 id="h-feed">Свежее с объектов</h2>
+        <p class="feed-status"><i aria-hidden="true"></i><span id="feedStatus">Блок обновляется сам из группы ВК</span></p>
+      </div>
+      <a class="btn btn-line btn-small" href="https://vk.ru/arksis.group" target="_blank" rel="noopener noreferrer">Группа в ВК</a>
+    </div>
+
+    <div class="feed-wrap">
+      <div>
+        <div class="feed" id="feed" aria-live="polite">
+          <div class="post skel is-big"></div><div class="post skel"></div><div class="post skel"></div>
+        </div>
+        <button class="btn btn-line btn-small feed-more" type="button" id="feedMore" hidden>Показать ещё</button>
+      </div>
+      <aside class="feed-aside" aria-label="Пометка для Алексея">
+        <div class="sketch-note">
+          <b>Пометка для Алексея</b>
+          Этот блок наполняется сам. Публикуете пост в группе с хэштегом #насайт, через час он здесь: фото, текст, видео. На сайт заходить не нужно.
+        </div>
+        <div class="sketch-note">
+          <b>Как это выглядит</b>
+          Нажмите, и в ленту придёт ваш вчерашний пост с клипом.
+          <button class="btn btn-main btn-small" type="button" id="feedDemo" style="margin-top:.8rem">Добавить пост</button>
+        </div>
+      </aside>
+    </div>
+
+    <div class="clips-head">
+      <h3>Алексей объясняет в клипах</h3>
+      <span class="feed-status" style="margin:0">Видео тоже подтягиваются из группы</span>
+    </div>
+    <div class="clips" id="clips" role="list"></div>
+  </div>
+</section>
+
+<section class="who-sec" aria-labelledby="h-who" style="padding-top:0">
+  <div class="wrap who">
+    <img src="img/alexey.jpg" alt="Алексей Трофименко проверяет ровность стены правилом на объекте" loading="lazy" width="360" height="640">
+    <div>
+      <h2 id="h-who">Кто отвечает за ремонт</h2>
+      <p class="lead">Алексей Трофименко, основатель АРКСИС ГРУПП и руководитель проектов. Ремонтом и строительством в Новосибирске занимается 18 лет.</p>
+      <blockquote>«Я отвечаю за каждый объект лично, своим именем и юридически.»<cite>Алексей Трофименко</cite></blockquote>
+      <div class="control">
+        <div><b>Менеджер</b><span>на связи с вами и следит за сроками и бюджетом</span></div>
+        <div><b>Прораб</b><span>постоянно на объекте, проверяет каждый этап</span></div>
+        <div><b>Технадзор</b><span>независимо принимает этап перед следующим</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rabota" aria-labelledby="h-flow" style="padding-top:0">
+  <div class="wrap">
+    <h2 id="h-flow">Как идёт работа</h2>
+    <ol class="flow">
+      <li><h3>Замер и расчёт</h3><p>Выезд, замер и смета бесплатно. Предварительный расчёт за 24 часа.</p></li>
+      <li><h3>Технический проект</h3><p>Дарим при заказе ремонта: планировка, мебель, электрика, сантехника, узлы и допуски.</p></li>
+      <li><h3>Договор</h3><p>Смета фиксируется: 200 000 ₽ в договоре означают 200 000 ₽ в конце. За сроки отвечаем деньгами по договору.</p></li>
+      <li><h3>Материалы</h3><p>Закупаем сами и отдаём скидки поставщиков до 30%. Цену ремонта можно зафиксировать до года.</p></li>
+      <li><h3>Работы</h3><p>Без предоплаты за работу: сначала этап, потом оплата. Фото и видео всех скрытых работ.</p></li>
+      <li><h3>Сдача</h3><p>Гарантия 15 лет по договору и обслуживание после гарантии.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="ceny" aria-labelledby="h-price" style="padding-top:0">
+  <div class="wrap">
+    <h2 id="h-price">Цены</h2>
+    <p class="lead">Цены из витрины группы ВК. Точную смету считаем по вашей квартире.</p>
+    <div class="prices">
+      <div class="pgroup">
+        <h3>Ремонт под ключ<span class="ask">уточнить единицы</span></h3>
+        <div class="prow"><span>Квартира «Стандарт»</span><i></i><b class="num">5 000–70 000 ₽</b></div>
+        <div class="prow"><span>Премиальный ремонт с дизайн-проектом</span><i></i><b class="num">7 000–80 000 ₽</b></div>
+        <div class="prow"><span>Ванная комната под ключ</span><i></i><b class="num">3 000–90 000 ₽</b></div>
+        <p class="note">Предварительный расчёт за 24 часа.</p>
+      </div>
+      <div class="pgroup">
+        <h3>Дизайн-проект, за м²</h3>
+        <div class="prow"><span>«Концепт»</span><i></i><b class="num">900 ₽</b></div>
+        <div class="prow"><span>«Технический»</span><i></i><b class="num">1 250 ₽</b></div>
+        <div class="prow"><span>«3D-визуализация»</span><i></i><b class="num">1 250 ₽</b></div>
+        <div class="prow"><span>«Практик»</span><i></i><b class="num">1 250 ₽</b></div>
+        <p class="note">Технический проект дарим при заказе ремонта.</p>
+      </div>
+      <div class="pgroup">
+        <h3>Приёмка и проверка<span class="ask">уточнить единицы</span></h3>
+        <div class="prow"><span>Приёмка квартиры у застройщика</span><i></i><b class="num">50–60 ₽</b></div>
+        <div class="prow"><span>То же в области</span><i></i><b class="num">80–100 ₽</b></div>
+        <div class="prow"><span>Приёмка коттеджа</span><i></i><b class="num">80–200 ₽</b></div>
+        <div class="prow"><span>Проверка ремонта</span><i></i><b class="num">100 ₽</b></div>
+        <div class="prow"><span>Замер на ремонт</span><i></i><b>бесплатно</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="raschet" aria-labelledby="h-calc" style="padding-top:0">
+  <div class="wrap calc">
+    <div>
+      <h2 id="h-calc">Расчёт ремонта за 24 часа</h2>
+      <p class="lead">Оставьте площадь и телефон. Пришлём предварительную смету и чек-лист «15 скрытых дефектов при приёмке квартиры у застройщика».</p>
+      <div class="alt">
+        <span>Или напишите слово «РАСЧЁТ» в сообщения группы</span>
+        <a class="btn btn-line" href="https://vk.me/arksis.group" target="_blank" rel="noopener noreferrer" style="justify-self:start">Написать в ВК</a>
+        <a class="phone num" href="tel:+79831208500">+7 983 120-85-00</a>
+        <a class="phone num" href="tel:+79628404747" style="font-size:1.05rem;font-weight:500">+7 962 840-47-47</a>
+      </div>
+      <a class="rating" href="https://vk.ru/reviews-36832487" target="_blank" rel="noopener noreferrer"><b class="num">4,9</b><span>в ВК по 45 отзывам</span></a>
+    </div>
+
+    <form class="lead-form" id="leadForm" novalidate>
+      <div class="field">
+        <label for="fArea">Площадь, м²</label>
+        <input id="fArea" name="area" type="number" inputmode="numeric" min="5" max="2000" placeholder="Например, 64">
+      </div>
+      <fieldset class="field">
+        <legend>Объект</legend>
+        <div class="seg">
+          <label><input type="radio" name="kind" value="Новостройка" checked>Новостройка</label>
+          <label><input type="radio" name="kind" value="Вторичка">Вторичка</label>
+          <label><input type="radio" name="kind" value="Дом">Дом</label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="fPhone">Телефон</label>
+        <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required aria-describedby="fPhoneHelp">
+        <small id="fPhoneHelp">Перезвоним или напишем в мессенджер, как удобнее.</small>
+      </div>
+      <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="check"><input type="checkbox" name="consent" id="fConsent" required><span>Согласен на обработку персональных данных по <a href="#policy">политике конфиденциальности</a><span class="ask">уточнить</span></span></label>
+      <button class="btn btn-main" type="submit">Получить расчёт</button>
+      <p class="form-status" id="formStatus" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="foot-phone num" href="tel:+79831208500">+7 983 120-85-00</a>
+    <div class="foot-grid">
+      <div><b>АРКСИС ГРУПП</b>Ремонт квартир и домов под ключ, дизайн интерьера, малоэтажное строительство. Новосибирск и область.</div>
+      <div><b>Офис</b>ул. Николая Островского, 195, Новосибирск<br>Открыто до 20:00<span class="ask">уточнить часы</span></div>
+      <div><b>Связь</b><a href="tel:+79628404747" class="num">+7 962 840-47-47</a><br><a href="mailto:arksis.nsk@mail.ru">arksis.nsk@mail.ru</a><br><a href="https://vk.ru/arksis.group" target="_blank" rel="noopener noreferrer">vk.ru/arksis.group</a></div>
+      <div><b>Реквизиты</b>ИП Трофименко Алексей Владимирович<br>ИНН 540132570341<br>ОГРНИП 326547600065440</div>
+    </div>
+    <div class="foot-bottom">
+      <span id="policy">Политика обработки персональных данных<span class="ask">уточнить</span></span>
+      <span>Набросок сайта, октябрь 2026</span>
+    </div>
+  </div>
+</footer>
+
+<dialog id="dlgPost" aria-labelledby="dlgPostTitle">
+  <button class="dlg-close" type="button" data-close aria-label="Закрыть">×</button>
+  <div class="gal" id="dlgGal"></div>
+  <div class="dlg-text">
+    <div class="post-meta"><span id="dlgPlace"></span><time id="dlgDate"></time></div>
+    <h3 id="dlgPostTitle"></h3>
+    <p id="dlgText"></p>
+    <a id="dlgLink" href="#" target="_blank" rel="noopener noreferrer" style="color:var(--green);font-weight:500;text-decoration:none">Открыть пост в ВК</a>
+  </div>
+</dialog>
+
+<dialog id="dlgVideo" aria-label="Клип из группы ВК">
+  <button class="dlg-close" type="button" data-close aria-label="Закрыть">×</button>
+  <div class="video-box" id="videoBox"></div>
+</dialog>
+
+<script src="app.js" defer></script>
+</body>
+</html>
