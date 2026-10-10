@@ -26,9 +26,10 @@
     const ctx = cv.getContext('2d');
     const small = document.createElement('canvas');
     const sctx = small.getContext('2d', { willReadFrequently: true });
-    let W = 0, H = 0, dpr = 1, progress = 0, canRead = true;
+    let W = 0, H = 0, dpr = 1, progress = 0, canRead = true, lastKey = '';
 
     const resize = () => {
+      lastKey = '';
       const r = fig.getBoundingClientRect();
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = r.width; H = r.height;
@@ -43,7 +44,11 @@
       if (p >= 1) return;
 
       const e = smooth(0, 1, p);
-      const cell = Math.max(2, 64 * Math.pow(1 - e, 1.25) + 2);
+      // размер клетки шагами по 1 px: так кадр пересчитывается только при видимой разнице
+      const cell = Math.max(2, Math.round(64 * Math.pow(1 - e, 1.25) + 2));
+      const key = `${cell}|${Math.round(smooth(.4, .9, p) * 40)}|${W}x${H}`;
+      if (key === lastKey) return;
+      lastKey = key;
       const cols = Math.ceil(W / cell), rows = Math.ceil(H / cell);
       small.width = cols; small.height = rows;
 
@@ -84,7 +89,7 @@
 
       if (glyphs.length) {
         ctx.fillStyle = 'rgba(10,11,14,.75)';
-        ctx.font = `${Math.round(cell * .62 * dpr)}px "Martian Mono", monospace`;
+        ctx.font = `600 ${Math.round(cell * .62 * dpr)}px "Golos Text", sans-serif`;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         for (let i = 0; i < glyphs.length; i += 2) {
           ctx.fillText('z', (glyphs[i] + .5) * cell * dpr, (glyphs[i + 1] + .5) * cell * dpr);
@@ -105,7 +110,7 @@
   if (!poster) return;
   const pctx = poster.getContext('2d');
   const car = new Image();
-  car.src = 'img/work/rs7-cut.png';
+  car.src = 'img/work/rs7-cut.webp';
   const mask = new Image();
   // маска машины 160×75 внутри кода — чтобы читать её даже при открытии файла с диска
   mask.src = 'data:image/png;base64,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';
@@ -212,7 +217,7 @@
 
     // зона из символов «z», как в референсе
     c.fillStyle = '#0a0b0e';
-    c.font = `${cell * 1.05}px "Martian Mono", monospace`;
+    c.font = `600 ${cell * 1.05}px "Golos Text", sans-serif`;
     c.textAlign = 'center'; c.textBaseline = 'middle';
     const zx0 = Math.floor(cols * .6), zx1 = Math.floor(cols * .9);
     const zy0 = Math.floor(rows * .13), zy1 = Math.floor(rows * .43);
@@ -233,7 +238,7 @@
 
     c.fillRect(PW * .04, PH * .03, PW * .085, PW * .034);
     c.fillStyle = '#e7eaef';
-    c.font = `500 ${PW * .022}px "Martian Mono", monospace`;
+    c.font = `600 ${PW * .022}px "Golos Text", sans-serif`;
     c.textAlign = 'center';
     c.fillText('on', PW * .0825, PH * .03 + PW * .017);
     for (let k = 0; k < 10; k++) {
@@ -242,10 +247,10 @@
     }
 
     c.fillStyle = '#0a0b0e';
-    c.font = `400 ${Math.max(9, PW * .018)}px "Martian Mono", monospace`;
+    c.font = `500 ${Math.max(9, PW * .018)}px "Golos Text", sans-serif`;
     c.textBaseline = 'alphabetic';
     c.textAlign = 'left';
-    c.fillText('AUDI RS 7 ABT — 2023', PW * .045, PH * .955);
+    c.fillText('AUDI RS 7 ABT, 2023', PW * .045, PH * .955);
     c.textAlign = 'right';
     c.fillText('LOST DATA / 760 Л.С.', PW * .955, PH * .955);
     c.textAlign = 'left';
