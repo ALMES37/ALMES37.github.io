@@ -606,6 +606,17 @@ ul { padding: 0; list-style: none; }
   font: 700 clamp(44px, 7vw, 108px)/.9 var(--f-display); text-transform: uppercase; letter-spacing: -.02em;
   color: transparent; -webkit-text-stroke: 1.2px rgba(214, 224, 240, .38);
 }
+.slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.slot {
+  position: relative; aspect-ratio: 4 / 5; border-radius: 14px;
+  border: 1px dashed rgba(214, 224, 240, .22);
+  background: repeating-linear-gradient(135deg, rgba(214, 224, 240, .03) 0 10px, transparent 10px 20px);
+  display: flex; flex-direction: column; justify-content: space-between; padding: 14px;
+  transition: border-color .4s, background-color .4s;
+}
+.slot:hover { border-color: rgba(214, 224, 240, .45); background-color: rgba(214, 224, 240, .03); }
+.slot__n { font: 700 clamp(28px, 3vw, 44px)/1 var(--f-display); color: transparent; -webkit-text-stroke: 1px rgba(214, 224, 240, .35); }
+.slot__t { font-size: 13px; color: var(--fg-mute); }
 .vacant__text { display: flex; flex-direction: column; gap: 22px; }
 .vacant__text p { color: var(--fg-dim); }
 .vacant__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }

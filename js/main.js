@@ -8,7 +8,7 @@
 const LINKS = {
   tgChannel: 'https://t.me/ALMES378',
   tg: 'https://t.me/ALMES37',
-  vk: '',
+  vk: 'https://vk.ru/almes36',
   mail: '',
 };
 
