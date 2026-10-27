@@ -13,11 +13,11 @@
 @font-face { font-family: "Golos Text"; font-style: normal; font-weight: 400 700; font-display: swap;
   src: url("../fonts/golos-lat.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
-/* позиция блика на серебряных заголовках (анимируется один раз при появлении) */
-@property --hx { syntax: "<percentage>"; inherits: false; initial-value: -30%; }
-/* угол, на который повёрнуто отражение в канте капсулы */
+/* позиция блика на серебряных заголовках (анимируется один раз при появлении).
+   Наследуется: пока заголовок разрезан на строки, блик рисуют сами строки */
+@property --hx { syntax: "<percentage>"; inherits: true; initial-value: -30%; }
+/* угол, на который повёрнуто отражение в канте капсулы (крутит скрипт, когда капсула переключается) */
 @property --rim { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-@keyframes rim { to { --rim: 360deg; } }
 
 :root {
   /* графит и ночь */
@@ -81,6 +81,8 @@ picture { display: block; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 h1, h2, h3, h4, p, dl, dd, ul, figure { margin: 0; }
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
 ul { padding: 0; list-style: none; }
 ::selection { background: var(--alu-2); color: var(--ink); }
 :focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; border-radius: 6px; }
@@ -96,6 +98,30 @@ ul { padding: 0; list-style: none; }
   transition: top .2s;
 }
 .skip:focus { top: 16px; }
+
+/* ==========================================================
+   Переходы: две шторки смыкаются к полосе света и расходятся.
+   Тот же свет, что в заставке, только наоборот.
+   ========================================================== */
+.curtain { position: fixed; inset: 0; z-index: 90; visibility: hidden; pointer-events: none; }
+.curtain.is-on, .curtain-in .curtain { visibility: visible; pointer-events: auto; }
+.curtain__half {
+  position: absolute; left: 0; right: 0; top: 0; height: 50.5%;
+  background: linear-gradient(180deg, var(--ink-0) 0%, #0b1226 100%);
+  box-shadow: inset 0 -1px 0 rgba(214, 224, 240, .16);
+  will-change: transform; /* где стоят шторки, решает скрипт; без него они просто спрятаны */
+}
+.curtain__half--bot {
+  top: auto; bottom: 0;
+  background: linear-gradient(0deg, var(--ink-0) 0%, #0b1226 100%);
+  box-shadow: inset 0 1px 0 rgba(214, 224, 240, .16);
+}
+.curtain__line {
+  position: absolute; left: 6%; right: 6%; top: 50%; height: 2px; margin-top: -1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .95) 18%, #fff 50%, rgba(255, 255, 255, .95) 82%, transparent);
+  box-shadow: 0 0 14px 2px rgba(150, 180, 255, .75), 0 0 46px 6px rgba(80, 120, 230, .35);
+  transform: scaleX(0); opacity: 0;
+}
 
 /* что показывать мышке, а что пальцу */
 .only-touch { display: none; }
@@ -223,8 +249,8 @@ ul { padding: 0; list-style: none; }
   background: linear-gradient(90deg, #0a0d13 0%, #2a303b 55%, #8a929e 100%);
   -webkit-background-clip: text; background-clip: text;
 }
-/* капсула: белое глянцевое лицо и тонкий хромированный кант. По канту вращается тёмное отражение,
-   на его краях вспыхивают радужные полоски, как свет на гранёном металле */
+/* капсула: белое глянцевое лицо и тонкий хромированный кант. Когда капсула переезжает,
+   по канту один раз прокатывается тёмное отражение с радужными краями, как свет на гранёном металле */
 .nav__ind {
   position: absolute; z-index: 0; left: 0; top: 50%; height: 38px; margin-top: -19px; width: 0;
   border-radius: 99px;
@@ -232,10 +258,8 @@ ul { padding: 0; list-style: none; }
   background: var(--pill-face) padding-box, var(--pill-rim) border-box;
   box-shadow: 0 9px 16px -9px rgba(0, 0, 0, .9), 0 2px 4px rgba(0, 0, 0, .35);
   opacity: 0;
-  animation: rim 6s linear infinite;
   transition: transform .5s var(--ease-out), width .5s var(--ease-out), opacity .3s;
 }
-.nav:not(.is-shown):not(.is-docked) .nav__ind { animation-play-state: paused; }
 .nav__tg {
   height: 38px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 99px; white-space: nowrap;
   font-size: 14px; color: var(--fg); border: 1px solid var(--line-2);
@@ -431,14 +455,21 @@ ul { padding: 0; list-style: none; }
 
 /* «табличка» как на машине: штампованные строки на тёмном металле */
 .plate {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px;
-  border-radius: 12px; overflow: hidden;
-  background: var(--line);
-  border: 1px solid var(--line);
-  max-width: 640px;
+  position: relative; max-width: 640px;
+  padding: 8px 26px; border-radius: 10px;
+  background: linear-gradient(180deg, #121620, #0b0e14);
+  border: 1px solid var(--line-2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
 }
-.plate div { padding: 14px 16px 15px; background: linear-gradient(180deg, #11151d, #0c0f15); }
-.plate dt { font-size: 12px; color: var(--fg-mute); margin-bottom: 4px; }
+.plate::before { /* четыре заклёпки по углам */
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  --rv: radial-gradient(circle, #c9d0d9 0 1.4px, #3a414c 2.2px, transparent 2.8px);
+  background: var(--rv) 9px 9px / 6px 6px no-repeat, var(--rv) calc(100% - 9px) 9px / 6px 6px no-repeat,
+              var(--rv) 9px calc(100% - 9px) / 6px 6px no-repeat, var(--rv) calc(100% - 9px) calc(100% - 9px) / 6px 6px no-repeat;
+}
+.plate div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 13px 0; }
+.plate div + div { border-top: 1px solid var(--line); }
+.plate dt { font: 500 11px/1.3 var(--f-display); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
 .plate dd { font-size: 15px; line-height: 1.4; }
 
 /* лента фото */
@@ -470,17 +501,22 @@ ul { padding: 0; list-style: none; }
 }
 
 /* серебряные заголовки разделов: по ним один раз проходит блик */
-.sec-title {
-  font: 700 clamp(40px, 10.5vw, 168px)/.9 var(--f-display);
-  text-transform: uppercase; letter-spacing: -.02em;
+.sec-title { font: 700 clamp(40px, 10.5vw, 168px)/.9 var(--f-display); text-transform: uppercase; letter-spacing: -.02em; }
+.sec-title, .sec-title .sl__i {
   background:
     linear-gradient(100deg, transparent calc(var(--hx) - 14%), rgba(255, 255, 255, .96) var(--hx), transparent calc(var(--hx) + 14%)),
     var(--silver-text);
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
 }
+.sec-title.is-split { background: none; }
 .sec-title.is-lit { animation: lit 1.6s var(--ease-io) forwards; }
 @keyframes lit { to { --hx: 135%; } }
+
+/* заголовок, разрезанный на строки: каждая выезжает из-под своей маски.
+   Запас снизу, чтобы не обрезались хвосты у Д, Ц, Щ */
+.sl { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+.sl__i { display: inline-block; will-change: transform; }
 
 .group { margin-top: clamp(56px, 7vw, 96px); }
 .group + .group { margin-top: clamp(110px, 12vw, 170px); }
@@ -501,7 +537,8 @@ ul { padding: 0; list-style: none; }
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
 .proj__body { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
-.proj__kind { font-size: 13px; color: var(--fg-mute); }
+/* подпись над названием: строчка из техпаспорта, а не обычный серый текст */
+.proj__kind { font: 500 12px/1.3 var(--f-display); letter-spacing: .16em; text-transform: uppercase; color: var(--fg-mute); }
 .proj__title { font: 700 clamp(30px, 3.2vw, 46px)/1 var(--f-display); text-transform: uppercase; color: var(--alu-1); }
 .proj__text { color: var(--fg-dim); font-size: 16px; line-height: 1.6; max-width: 46ch; }
 .proj__hint { font-size: 13px; color: var(--ice); }
@@ -595,30 +632,37 @@ ul { padding: 0; list-style: none; }
 .proj__body--wide > div:first-child { display: flex; flex-direction: column; gap: 12px; }
 .proj__aside { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
 
-/* Для клиентов: пустое место на витрине */
+/* Для клиентов: пустое парковочное место, вид сверху. Разметка с трёх сторон, номер краской на асфальте */
 .vacant {
   display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px clamp(24px, 4vw, 64px); align-items: center;
-  padding: clamp(28px, 4vw, 52px); border-radius: var(--r);
-  border: 1px dashed rgba(214, 224, 240, .2);
-  background: radial-gradient(80% 120% at 0% 100%, rgba(23, 43, 94, .28), transparent 60%), rgba(12, 15, 22, .6);
+  padding: clamp(14px, 1.6vw, 20px); padding-right: clamp(24px, 4vw, 56px); border-radius: var(--r);
+  border: 1px solid var(--line);
+  background: radial-gradient(80% 120% at 100% 0%, rgba(23, 43, 94, .3), transparent 60%), rgba(12, 15, 22, .7);
 }
-.vacant__big {
-  font: 700 clamp(44px, 7vw, 108px)/.9 var(--f-display); text-transform: uppercase; letter-spacing: -.02em;
-  color: transparent; -webkit-text-stroke: 1.2px rgba(214, 224, 240, .38);
+.bay {
+  position: relative; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(70% 90% at 50% 40%, rgba(var(--navy-glow), .16), transparent 70%),
+    linear-gradient(180deg, #0d1017, #090b10);
 }
-.slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.slot {
-  position: relative; aspect-ratio: 4 / 5; border-radius: 14px;
-  border: 1px dashed rgba(214, 224, 240, .22);
-  background: repeating-linear-gradient(135deg, rgba(214, 224, 240, .03) 0 10px, transparent 10px 20px);
-  display: flex; flex-direction: column; justify-content: space-between; padding: 14px;
-  transition: border-color .4s, background-color .4s;
+.bay::before { /* белая разметка: две боковые линии и задняя, спереди въезд открыт */
+  content: ""; position: absolute; inset: 12% 22% -4px;
+  border: 3px solid rgba(226, 232, 240, .42); border-bottom: 0;
 }
-.slot:hover { border-color: rgba(214, 224, 240, .45); background-color: rgba(214, 224, 240, .03); }
-.slot__n { font: 700 clamp(28px, 3vw, 44px)/1 var(--f-display); color: transparent; -webkit-text-stroke: 1px rgba(214, 224, 240, .35); }
-.slot__t { font-size: 13px; color: var(--fg-mute); }
-.vacant__text { display: flex; flex-direction: column; gap: 22px; }
-.vacant__text p { color: var(--fg-dim); }
+.bay::after { /* асфальт: мелкая крошка */
+  content: ""; position: absolute; inset: 0; opacity: .5; mix-blend-mode: overlay;
+  background: url("../img/brushed.webp") 0 0 / 320px 160px;
+}
+.bay__n {
+  position: relative; z-index: 1;
+  font: 700 clamp(56px, 9vw, 132px)/1 var(--f-display); letter-spacing: .02em;
+  color: rgba(226, 232, 240, .2); /* краска на асфальте, слегка стёртая */
+  font-variant-numeric: tabular-nums;
+}
+.vacant__text { display: flex; flex-direction: column; gap: 18px; padding-block: 12px; }
+.vacant__title { font: 600 clamp(24px, 2.6vw, 34px)/1.1 var(--f-display); text-transform: uppercase; color: var(--alu-1); }
+.vacant__text p:not(.vacant__title) { color: var(--fg-dim); }
 .vacant__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
 
 /* ==========================================================
@@ -683,7 +727,6 @@ ul { padding: 0; list-style: none; }
   color: var(--ink); border: 2px solid transparent; padding: 0 17px 0 11px;
   background: var(--pill-face) padding-box, var(--pill-rim) border-box;
   box-shadow: 0 8px 16px -8px rgba(0, 0, 0, .9);
-  animation: rim 6s linear infinite;
 }
 .konf__text { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
 .konf__text p { color: var(--fg-dim); max-width: 54ch; }
@@ -727,43 +770,6 @@ ul { padding: 0; list-style: none; }
   box-shadow: 0 40px 90px -40px rgba(var(--navy-glow), .55), 0 0 0 1px rgba(255, 255, 255, .08);
 }
 .poster figcaption { margin-top: 14px; font-size: 13px; color: var(--fg-mute); max-width: 52ch; }
-
-/* переключатель «мои работы / на заказ» */
-.shelf {
-  margin-top: clamp(70px, 9vw, 120px);
-  display: grid; grid-template-columns: minmax(280px, 400px) 1fr; gap: clamp(24px, 4vw, 56px); align-items: center;
-  padding: clamp(20px, 3vw, 36px); border-radius: var(--r);
-  background: linear-gradient(180deg, #121620, #0c0f15);
-  border: 1px solid var(--line);
-}
-.toggle {
-  --pos: 0;
-  position: relative; display: grid; grid-template-columns: 1fr 1fr;
-  width: 100%; height: 74px; padding: 7px; border-radius: 99px;
-  background: #05070a;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, .8), 0 0 0 1px rgba(214, 224, 240, .08);
-}
-.toggle button { position: relative; z-index: 2; border-radius: 99px; font-size: 15px; font-weight: 500; color: var(--fg-mute); transition: color .4s; }
-.toggle button[aria-selected="true"] {
-  color: transparent;
-  background: linear-gradient(90deg, #0a0d13 0%, #2a303b 50%, #8a929e 100%);
-  -webkit-background-clip: text; background-clip: text;
-}
-.toggle__knob {
-  position: absolute; z-index: 1; top: 6px; bottom: 6px; left: 6px; width: calc(50% - 6px);
-  border-radius: 99px;
-  border: 2px solid transparent;
-  background: var(--pill-face) padding-box, var(--pill-rim) border-box;
-  box-shadow: 0 12px 22px -10px rgba(0, 0, 0, .95), 0 3px 6px rgba(0, 0, 0, .45);
-  transform: translateX(calc(var(--pos) * 100%));
-  transition: transform .6s var(--ease-out);
-  animation: rim 6s linear infinite;
-}
-.toggle:not(.is-visible) .toggle__knob { animation-play-state: paused; }
-.wip { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.wip__tag { font-size: 13px; color: var(--ice); }
-.wip h3 { font: 600 clamp(24px, 2.6vw, 34px) var(--f-display); text-transform: uppercase; color: var(--alu-1); }
-.wip p:not(.wip__tag) { color: var(--fg-dim); font-size: 15px; max-width: 52ch; }
 
 /* ==========================================================
    Связь
@@ -863,7 +869,7 @@ ul { padding: 0; list-style: none; }
   .about__text > * { grid-column: 1; }
   .about__name { grid-row: 1; }
   .portrait { grid-row: 2; }
-  .plate { grid-template-columns: 1fr; }
+  .plate { padding: 6px 20px; }
 
   .strip { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .strip::-webkit-scrollbar { display: none; }
@@ -877,15 +883,14 @@ ul { padding: 0; list-style: none; }
   .proj--shop .proj__media { grid-row: 1; }
   .proj--pyr .proj__media { aspect-ratio: 16 / 10; }
   .proj__body--wide { grid-template-columns: 1fr; }
-  .vacant { grid-template-columns: 1fr; }
+  .vacant { grid-template-columns: 1fr; padding: 12px; }
+  .vacant__text { padding: 6px 10px 14px; }
 
   .laptop__base { width: 108%; left: -4%; }
   .konf__foot { grid-template-columns: 1fr; }
 
   .design__grid { grid-template-columns: 1fr; }
-  .shelf { grid-template-columns: 1fr; }
   .plate-c__bg { width: 100%; opacity: .35; -webkit-mask-image: linear-gradient(180deg, transparent, #000 60%); mask-image: linear-gradient(180deg, transparent, #000 60%); }
-  .toggle { height: 64px; }
 }
 
 @media (max-width: 520px) {
@@ -895,6 +900,7 @@ ul { padding: 0; list-style: none; }
   .konf__styles { display: grid; grid-template-columns: 1fr 1fr; }
   .konf__styles button { padding: 0 12px 0 10px; font-size: 13px; }
   .nav__brand { width: 104px; }
+  .plate div { grid-template-columns: 1fr; gap: 3px; }
   .link { gap: 12px; flex-wrap: wrap; }
   .link__sub { order: 3; width: 100%; }
   .link__arr { width: 40px; height: 40px; }

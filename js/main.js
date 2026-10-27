@@ -47,21 +47,51 @@ const LINKS = {
   }
   const jump = (y) => window.scrollTo({ top: y, behavior: 'instant' });
 
-  /* ---------- Перебор символов (для заголовка в «Дизайне») ---------- */
-  const GLYPHS = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ#%&*/<>▒░▓';
-  const rnd = (s) => s[Math.floor(Math.random() * s.length)];
-  function decode(el, text, duration = 600) {
-    if (reduce) { el.textContent = text; return; }
-    const t0 = performance.now();
-    const tick = (now) => {
-      const p = Math.min(1, (now - t0) / duration);
-      const done = Math.floor(p * text.length);
-      let out = '';
-      for (let i = 0; i < text.length; i++) out += i < done || text[i] === ' ' ? text[i] : rnd(GLYPHS);
-      el.textContent = out;
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+  /* ---------- Кант капсулы: отражение прокатывается один раз, когда капсула переключилась ---------- */
+  const spin = (el) => {
+    if (!motion || !el) return;
+    el._rim = (el._rim || 0) + 360; // угол только растёт: если крутили не до конца, продолжаем без рывка
+    gsap.to(el, { '--rim': `${el._rim}deg`, duration: 1.4, ease: 'power2.out', overwrite: 'auto' });
+  };
+
+  /* ---------- Заголовок по строкам ----------
+     Слова раскладываются по строкам ровно так, как их расставил браузер, и каждая строка
+     получает свою маску. revert() возвращает заголовок как был. */
+  function splitLines(el) {
+    const html = el.innerHTML;
+    const words = [];
+    [...el.childNodes].forEach((n) => {
+      if (n.nodeType === 3) n.textContent.split(/[ \t\n]+/).forEach((w) => { if (w) words.push(w); });
+      else if (n.nodeName === 'BR') words.push(null);
+    });
+    el.textContent = '';
+    const spans = [];
+    words.forEach((w) => {
+      if (w === null) { el.appendChild(document.createElement('br')); return; }
+      const s = document.createElement('span');
+      s.textContent = w;
+      el.append(s, ' ');
+      spans.push(s);
+    });
+    const rows = [];
+    let top = null;
+    spans.forEach((s) => {
+      if (top === null || Math.abs(s.offsetTop - top) > 2) { rows.push([]); top = s.offsetTop; }
+      rows[rows.length - 1].push(s.textContent);
+    });
+    el.textContent = '';
+    const lines = rows.map((r) => {
+      const sl = document.createElement('span');
+      const inner = document.createElement('span');
+      sl.className = 'sl';
+      inner.className = 'sl__i';
+      inner.textContent = r.join(' ');
+      sl.appendChild(inner);
+      el.appendChild(sl);
+      return inner;
+    });
+    el.classList.add('is-split');
+    return { lines, revert: () => { el.innerHTML = html; el.classList.remove('is-split'); } };
   }
 
   /* ---------- Ссылки на соцсети ---------- */
@@ -346,12 +376,6 @@ const LINKS = {
     new IntersectionObserver(([e]) => {
       bar.classList.toggle('is-shown', heroGone || e.boundingClientRect.top < innerHeight * 0.7);
     }, { threshold: [0, 0.01, 0.5, 1] }).observe(about);
-    // «наверх», когда первого экрана уже нет: к началу сайта
-    $$('.nav__brand, [data-top]').forEach((a) => a.addEventListener('click', (e) => {
-      if (!heroGone) return;
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-    }));
 
     // белая капсула с хромированным кантом ездит под пунктами; тёмный текст у того пункта, под которым она стоит
     if (hasGSAP) ind.style.transition = 'opacity .3s';
@@ -362,7 +386,7 @@ const LINKS = {
       under = link;
       if (link) link.classList.add('is-under');
     };
-    const point = (link) => {
+    const point = (link, shine) => {
       if (!link || !link.offsetWidth) { ind.style.opacity = '0'; setUnder(null); return; }
       const x = link.offsetLeft, w = link.offsetWidth;
       const first = ind.style.opacity !== '1';
@@ -375,6 +399,7 @@ const LINKS = {
       }
       gsap.to(ind, { x, width: w, duration: 0.55, ease: 'expo.out', overwrite: 'auto' });
       gsap.delayedCall(0.12, () => setUnder(link)); // текст темнеет, когда капсула уже почти под пунктом
+      if (shine && link !== under) spin(ind); // блик по канту только при смене раздела, не на каждое наведение
     };
     let active = null;
     if (fine) {
@@ -389,7 +414,7 @@ const LINKS = {
           l.classList.toggle('is-active', l === active);
           if (l === active) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
         });
-        point(active);
+        point(active, true);
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
     $$('main > section[id]').forEach((s) => io.observe(s));
@@ -424,26 +449,59 @@ const LINKS = {
     });
   }
 
-  /* ---------- Появление текста при прокрутке ---------- */
+  /* ---------- Заголовки: строки выезжают из-под маски, по серебру проходит блик ---------- */
+  function lineReveal(el) {
+    let split = null, shown = false, w = innerWidth;
+    const cut = () => {
+      if (shown) return;
+      if (split) split.revert();
+      split = splitLines(el);
+      gsap.set(split.lines, { yPercent: 115 });
+    };
+    cut();
+    // шрифт и ширина окна могут переставить переносы: режем заново, пока заголовок не показан
+    if (document.fonts) document.fonts.ready.then(cut);
+    addEventListener('resize', () => { if (!shown && innerWidth !== w) { w = innerWidth; cut(); } }, { passive: true });
+    ScrollTrigger.create({
+      trigger: el, start: 'top 88%', once: true,
+      onEnter: () => {
+        shown = true;
+        gsap.to(split.lines, { yPercent: 0, duration: 1.15, stagger: 0.09, ease: 'expo.out', onComplete: split.revert });
+        if (el.hasAttribute('data-lit')) gsap.delayedCall(0.3, () => el.classList.add('is-lit'));
+      },
+    });
+  }
+
+  /* ---------- Списки: строки прочерчиваются слева направо вместе со своей линией, как на чертеже ---------- */
+  function rowsReveal(list) {
+    const rows = [...list.children].filter((r) => !r.hidden);
+    gsap.set(rows, { clipPath: 'inset(0% 100% 0% 0%)' });
+    ScrollTrigger.create({
+      trigger: list, start: 'top 88%', once: true,
+      onEnter: () => gsap.to(rows, {
+        clipPath: 'inset(0% 0% 0% 0%)', duration: 0.95, stagger: 0.08, ease: 'expo.inOut',
+        onComplete: () => gsap.set(rows, { clearProps: 'clipPath' }),
+      }),
+    });
+  }
+
+  /* ---------- Появление при прокрутке ----------
+     Три приёма, у каждого своя работа: заголовки выезжают по строкам, фото открываются воротами гаража,
+     списки прочерчиваются. Обычный текст не анимируется: его читают, а не смотрят. */
   function reveals() {
     const portrait = window.portraitFX;
-    // серебряные заголовки: по ним один раз проходит блик
-    const lit = $$('[data-lit]');
-    if ('IntersectionObserver' in window) {
+    // без анимации серебряные заголовки просто ловят блик, когда показались
+    if (!motion && 'IntersectionObserver' in window) {
       const io = new IntersectionObserver((es) => es.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add('is-lit'); io.unobserve(e.target); }
       }), { rootMargin: '0px 0px -20% 0px' });
-      lit.forEach((el) => io.observe(el));
+      $$('[data-lit]').forEach((el) => io.observe(el));
     }
 
     if (!motion) { if (portrait) portrait.set(1); return; }
 
-    const els = $$('[data-reveal]');
-    gsap.set(els, { opacity: 0, y: 26 });
-    ScrollTrigger.batch(els, {
-      start: 'top 90%', once: true,
-      onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 1.05, stagger: 0.09, ease: 'expo.out', overwrite: true }),
-    });
+    $$('[data-reveal="lines"]').forEach(lineReveal);
+    $$('[data-reveal="rows"]').forEach(rowsReveal);
 
     if (portrait) {
       ScrollTrigger.create({
@@ -477,9 +535,10 @@ const LINKS = {
     // фото работ открываются снизу вверх, как ворота гаража
     $$('[data-media]').forEach((m) => {
       const inner = $$(':scope > picture, :scope > .pyr__img', m);
+      const r = m.dataset.round || 18; // скругление как у самого блока
       const st = { trigger: m, start: 'top 86%', once: true };
-      gsap.fromTo(m, { clipPath: 'inset(100% 0% 0% 0% round 18px)' }, {
-        clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 1.35, ease: 'expo.inOut', scrollTrigger: st,
+      gsap.fromTo(m, { clipPath: `inset(100% 0% 0% 0% round ${r}px)` }, {
+        clipPath: `inset(0% 0% 0% 0% round ${r}px)`, duration: 1.35, ease: 'expo.inOut', scrollTrigger: st,
         onComplete: () => gsap.set(m, { clearProps: 'clipPath' }),
       });
       if (inner.length) gsap.fromTo(inner, { scale: 1.16 }, { scale: 1, duration: 1.8, ease: 'expo.out', scrollTrigger: st });
@@ -637,6 +696,7 @@ const LINKS = {
       const prev = shots[i], next = shots[n];
       i = n;
       btns.forEach((b, k) => { b.classList.toggle('is-on', k === n); b.setAttribute('aria-pressed', String(k === n)); });
+      spin(btns[n]);
       const img = next.querySelector('img');
       img.loading = 'eager';
       const go = () => {
@@ -659,43 +719,78 @@ const LINKS = {
     }, { threshold: 0.35 }).observe(laptop);
   }
 
-  /* ---------- Тумблер «мои работы / на заказ» ---------- */
-  function wipToggle() {
-    const tg = $('[data-toggle]');
-    if (!tg) return;
-    const tabs = $$('[data-tab]', tg);
-    const title = $('[data-wip-title]');
-    // блик по канту ручки крутится, только пока тумблер на экране
-    new IntersectionObserver(([e]) => tg.classList.toggle('is-visible', e.isIntersecting)).observe(tg);
-    const text = $('[data-wip-text]');
-    const TEXT = {
-      mine: ['Мои работы', 'Собираю подборку. Скоро здесь появятся постеры, обложки и другие мои работы.'],
-      order: ['Работы на заказ', 'Здесь будут работы для заказчиков. Хочешь, чтобы первой была твоя? Напиши, обсудим.'],
+  /* ---------- Переходы: шторки ----------
+     Пункт меню: шторки смыкаются к полосе света, страница перескакивает к разделу, шторки расходятся.
+     Свой проект: шторки смыкаются, и только потом открывается сайт. Вернулся «Назад»: шторки расходятся.
+     С клавиатуры (Enter на ссылке) переход обычный, без шторок: так быстрее. */
+  function curtains() {
+    const el = $('[data-curtain]');
+    if (!el || !motion) {
+      root.classList.remove('curtain-in');
+      store.del('leave');
+      return;
+    }
+    const [top, bot] = $$('.curtain__half', el);
+    const line = $('.curtain__line', el);
+    let busy = false;
+    gsap.set(top, { yPercent: -100 });
+    gsap.set(bot, { yPercent: 100 });
+
+    const close = (dur) => {
+      busy = true;
+      el.classList.add('is-on');
+      return gsap.timeline()
+        .fromTo(top, { yPercent: -100 }, { yPercent: 0, duration: dur, ease: 'power3.inOut' }, 0)
+        .fromTo(bot, { yPercent: 100 }, { yPercent: 0, duration: dur, ease: 'power3.inOut' }, 0)
+        .fromTo(line, { scaleX: 0, opacity: 1 }, { scaleX: 1, duration: 0.32, ease: 'expo.out' }, dur * 0.62);
     };
-    const select = (k, focus) => {
-      tabs.forEach((b, n) => {
-        const on = n === k;
-        b.setAttribute('aria-selected', String(on));
-        b.tabIndex = on ? 0 : -1;
-        if (on && focus) b.focus();
-      });
-      tg.style.setProperty('--pos', k);
-      const [h, p] = TEXT[tabs[k].dataset.tab];
-      if (motion) {
-        gsap.timeline()
-          .to(text, { opacity: 0, y: -6, duration: 0.16, ease: 'power1.in' })
-          .add(() => { text.textContent = p; })
-          .to(text, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' });
-        decode(title, h, 520);
-      } else { title.textContent = h; text.textContent = p; }
+    const open = (delay = 0) => gsap.timeline({ delay, onComplete: () => { el.classList.remove('is-on'); busy = false; } })
+      .to(line, { opacity: 0, duration: 0.22, ease: 'power1.in' }, 0)
+      .to(top, { yPercent: -100, duration: 0.7, ease: 'expo.inOut' }, 0.04)
+      .to(bot, { yPercent: 100, duration: 0.7, ease: 'expo.inOut' }, 0.04);
+
+    // прыжок к разделу, пока шторки закрыты: первый экран уже не нужен, его убираем
+    const go = (id) => {
+      if (id !== 'top' && !heroGone) dropHero(false);
+      const target = id === 'top' ? null : document.getElementById(id);
+      jump(target ? target.getBoundingClientRect().top + scrollY : 0);
     };
-    tabs.forEach((b, n) => {
-      b.tabIndex = n === 0 ? 0 : -1;
-      b.addEventListener('click', () => select(n));
-      b.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); select(n === 0 ? 1 : 0, true); }
-      });
+
+    document.addEventListener('click', (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.detail === 0) return;
+      const a = e.target.closest('a[href]');
+      if (!a || a.classList.contains('skip')) return;
+      if (busy) { e.preventDefault(); return; }
+      if (a.hasAttribute('data-leave')) {
+        e.preventDefault();
+        store.set('leave', '1');
+        close(0.55).eventCallback('onComplete', () => { location.href = a.href; });
+        return;
+      }
+      const href = a.getAttribute('href');
+      const id = href.length > 1 && href[0] === '#' ? href.slice(1) : '';
+      if (!id || (id !== 'top' && !document.getElementById(id))) return;
+      e.preventDefault();
+      close(0.38).eventCallback('onComplete', () => { go(id); open(0.05); });
     });
+
+    // вернулись со своего проекта: шторки ещё закрыты, раскрываем
+    addEventListener('pageshow', (e) => {
+      if (!e.persisted || !el.classList.contains('is-on')) return;
+      store.del('leave');
+      open(0.15);
+    });
+    // играет заставка: она сама начинается с темноты, шторки не нужны
+    if (window.__intro) root.classList.remove('curtain-in');
+    if (root.classList.contains('curtain-in')) {
+      gsap.set([top, bot], { yPercent: 0 });
+      el.classList.add('is-on');
+      busy = true;
+      root.classList.remove('curtain-in');
+      const ready = document.fonts ? document.fonts.ready : Promise.resolve();
+      Promise.race([ready, new Promise((r) => setTimeout(r, 900))]).then(() => requestAnimationFrame(() => open(0.1)));
+    }
+    store.del('leave');
   }
 
   /* ---------- Подвал: буквы ALMES37 поднимаются, хром блестит вокруг курсора ---------- */
@@ -741,8 +836,8 @@ const LINKS = {
   shopStack();
   pyramid();
   konfig();
-  wipToggle();
   footer();
+  curtains();
 
   if (restore) {
     // обновили страницу в середине: первого экрана уже нет, возвращаемся туда, где остановились
